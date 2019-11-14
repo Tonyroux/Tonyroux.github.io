@@ -126,6 +126,19 @@
         #swirl {
             margin-left: 700px;
         }
+        #pedro {
+            margin-left: 780px;
+        }
+        #Pedro1 {
+            /*transform: rotate(20deg);*/
+            opacity: 0;
+            margin-left: 0px;
+            margin-top: 900px;
+            width: 90px;
+            height: 180px;
+            position: absolute;
+            z-index: 2;
+        }
     </style>
     
     <body id="main">
@@ -170,27 +183,38 @@
                 </div>
             </main>
         </div>
-        <button class="invisible" id ="quake" onclick="zoom()" autofocus>EARTHQUAKE</button>
-        <button class="invisible" id="swirl" onclick="winds()" autofocus>TORNADO</button>
+        <button class="invisible" id ="quake" onclick="zoom()">EARTHQUAKE</button>
+        <button class="invisible" id="swirl" onclick="winds()">TORNADO</button>
+        <button class="invisible" id="pedro" onclick="pedro()">PEDRO?</button>
+        <img src="Photos/Pedro.png" id="Pedro1">
     </body>
     
     <script>
         var photo_1 = document.getElementById("photo_me");
         var photo = document.getElementById("photo_me_quake");
+        var pedro2 = document.getElementById("Pedro1");
         var contain = document.getElementsByClassName("sidebar");
         var btn = document.getElementsByClassName("invisible");
         var x = 0
         var run = 0
         function zoom() {
+            run = 0;
             photo_1.style.display = "none";
             photo.style.opacity = "100";
             setInterval(zoomrun, 20);
         }
+        
         function winds() {
+            run = 0;
             photo_1.style.display = "none";
             photo.style.opacity = "100";
-            setInterval(windsOfChange, 20);
+            setInterval(windsOfChange, 5);
         }
+        
+        function pedro() {
+            setInterval(Pedro1, 40);
+        }
+        
         function zoomrun() {
             if (run === 0) {
                 x = 5;
@@ -206,6 +230,7 @@
             
             
         }
+        /*
         function flooding() {
             if (run >= 0 && run < 7) {
                 run ++;
@@ -219,12 +244,28 @@
                 photo.style.transform = "rotate(" + (72 - (x * (run - 6))) + "deg)";
                 contain.style.top = "-25 + 10";
             }
-        }
+        } */
         function windsOfChange() {
             if (run >= 0) {
-                run ++;
+                run += 0.5;
                 x = 12
                 photo.style.transform = "rotate(" + x * run + "deg)";
+            }
+        }
+        function Pedro1() {
+            pedro2.style.opacity = "100";
+            /*if (run >= 0) {
+                run ++;
+                x = 10
+                //pedro2.style.left = x + 'px';
+                pedro2.style.transform = "rotate(" + x * run + "deg)";
+            } */
+            if (run >= 0) {
+                run += 0.5;
+                x = 12
+                pedro2.style.transform = "rotate(" + x * run + "deg)";
+                pedro2.style.bottom = (x * run) - 500 + 'px';
+                pedro2.style.left = ((x * run)/2) + 'px';
             }
         }
         
