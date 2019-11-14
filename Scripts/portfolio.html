@@ -81,12 +81,19 @@
             height: 16px;
             position: absolute;
         }
+        .link {
+            color: lightgreen;
+        }
+        #exit {
+            color: maroon;
+            margin-left: 3px;
+        }
     </style>
     <body>
         <div id="console_bar">
             <img id="cmd" src="../Icons/CMD.jpg">
             <header id="console">C:\WINDOWS\system32\cmd.exe</header>
-            <header id="X"><a href="../index.html">X</a></header>
+            <header id="X"><a href="../index.html" id="exit">X</a></header>
             <header id="restore"></header>
             <header id="minimize"></header>
         </div>
@@ -96,7 +103,7 @@
             <br>
             <header id="schoolp">Portfolio for school projects</header>
             <ul>
-                <li>nothing to see here</li>
+                <li><a href="jsTest.html" class="link">Testing script and style manipulation</a></li>
             </ul>
             <header>Portfolio for personal projects</header>
             <ul>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> JS Testing</title>
+        <link rel="icon" href="../Icons/JS ico.png" type="image/png">
+    </head>
+    <style>
+        body {
+            background: lightgrey;
+        }
+        #returnLink {
+            color: black;
+            margin-left: 22px;
+            margin-top: -1px;
+            height: 20px;
+            width: 24px;
+            position: absolute;
+            text-decoration: none;
+        }
+        #returnP {
+            height: 20px;
+            width: 24px;
+            margin-left: -24px;
+            margin-top: 2px;
+            position: absolute;
+        }
+        #Pedro {
+            margin-left: 45%;
+            margin-top: 400px;
+            height: 180px;
+            width: 90px;
+            position: absolute;
+            z-index: 2;
+        }
+        #rotate {
+            margin-top: 550px;
+            position: absolute;
+        }
+    </style>
+    <body>
+        <header><a href="portfolio.html" id="returnLink"><img src="../Icons/CMD.jpg" id="returnP">&lt--</a></header>
+        <div id="btns">
+            <button id="rotate" onclick="startR()">Rotate</button>
+        </div>
+        <img src="../Photos/Pedro.png" id="Pedro">
+    </body>
+    <script>
+        //variables and timers
+        var Pedro = document.getElementById("Pedro");
+        var rotate = 0
+        var deg = 0
+        function startR() {
+            setInterval(Rotate, 40);
+        }
+        
+        //transformation scripts
+        function Rotate() {
+            if (rotate >= 0) {
+                rotate++;
+                deg = 12;
+                Pedro.style.transform = "rotate(" + deg * rotate + "deg)";
+            }
+        }
+    </script>
+</html>
