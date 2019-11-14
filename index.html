@@ -2,11 +2,12 @@
 <html>
         <head>
         <title>Not actually my first website! </title>
-        <link rel="icon" href="../Icons/coffeetest2.png" type="image/png">
+        <link rel="icon" href="Icons/coffeetest2.png" type="image/png">
     </head>
     <style>
         body {
             background-color: grey;
+            overflow: hidden;
         }
         /*
         p {
@@ -117,7 +118,13 @@
             background-color: grey;
             color: lightgrey;
             margin-top: 500px;
-            margin-left: 630px;
+            position: absolute;
+        }
+        #quake {
+            margin-left: 590px;
+        }
+        #swirl {
+            margin-left: 700px;
         }
     </style>
     
@@ -145,8 +152,8 @@
             <main>
                 <div class="sidebar">
                     <p id="it">       It me.</p>
-                    <img src="../Photos/Tony Rito_face.png" id="photo_me">
-                    <img src="../Photos/Tony Rito_face2.png" id="photo_me_quake">
+                    <img src="Photos/Tony Rito_face.png" id="photo_me">
+                    <img src="Photos/Tony Rito_face2.png" id="photo_me_quake">
                 </div>
                 
                 <div class="content">
@@ -163,12 +170,14 @@
                 </div>
             </main>
         </div>
-        <button class="invisible" onclick="zoom()" autofocus>EARTHQUAKE</button>
+        <button class="invisible" id ="quake" onclick="zoom()" autofocus>EARTHQUAKE</button>
+        <button class="invisible" id="swirl" onclick="winds()" autofocus>TORNADO</button>
     </body>
     
     <script>
         var photo_1 = document.getElementById("photo_me");
         var photo = document.getElementById("photo_me_quake");
+        var contain = document.getElementsByClassName("sidebar");
         var btn = document.getElementsByClassName("invisible");
         var x = 0
         var run = 0
@@ -176,6 +185,11 @@
             photo_1.style.display = "none";
             photo.style.opacity = "100";
             setInterval(zoomrun, 20);
+        }
+        function winds() {
+            photo_1.style.display = "none";
+            photo.style.opacity = "100";
+            setInterval(windsOfChange, 20);
         }
         function zoomrun() {
             if (run === 0) {
@@ -191,6 +205,27 @@
             }
             
             
+        }
+        function flooding() {
+            if (run >= 0 && run < 7) {
+                run ++;
+                x = 12
+                photo.style.transform = "rotate(" + x * run + "deg)";
+                contain.style.top = "-25 - 10";
+            }
+            if (run >= 7 && run < 14) {
+                run ++;
+                x = 12
+                photo.style.transform = "rotate(" + (72 - (x * (run - 6))) + "deg)";
+                contain.style.top = "-25 + 10";
+            }
+        }
+        function windsOfChange() {
+            if (run >= 0) {
+                run ++;
+                x = 12
+                photo.style.transform = "rotate(" + x * run + "deg)";
+            }
         }
         
     </script>
