@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Portfolio Page</title>
+        <link rel="icon" href="../Icons/CMD.jpg" type="image/jpg">
     </head>
     <style>
         body {
@@ -30,14 +31,15 @@
         #console {
             height: 20px;
             max-width: 990px;
-            margin-left: 20px;
-            margin-top: 5px;
+            margin-left: 30px;
+            margin-top:3px;
             background-color: lightgrey;
             color: black;
+            position: absolute;
         }
         #X {
             margin-left: 980px;
-            margin-top: -17px;
+            margin-top: 3px;
             height: 13px;
             width: 17px;
             background-color: rgb(234, 53, 15);
@@ -51,7 +53,7 @@
         }
         #restore {
             margin-left: 960px;
-            margin-top: -15px;
+            margin-top: 5px;
             height: 8px;
             width: 10px;
             background-color: lightgrey;
@@ -63,7 +65,7 @@
         }
         #minimize {
             margin-left: 940px;
-            margin-top: -13px;
+            margin-top: 7px;
             height: 8px;
             width: 10px;
             background-color: lightgrey;
@@ -72,9 +74,17 @@
             border-bottom-style: solid;
             border-bottom-color: grey;
         }
+        #cmd {
+            margin-left: 5px;
+            margin-top: 3px;
+            width: 20px;
+            height: 16px;
+            position: absolute;
+        }
     </style>
     <body>
         <div id="console_bar">
+            <img id="cmd" src="../Icons/CMD.jpg">
             <header id="console">C:\WINDOWS\system32\cmd.exe</header>
             <header id="X"><a href="index.html">X</a></header>
             <header id="restore"></header>
