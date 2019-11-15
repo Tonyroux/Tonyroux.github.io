@@ -45,6 +45,14 @@
             margin-top: 575px;
             position: absolute;
         }
+        #squish {
+            margin-top: 500px;
+            position: absolute;
+        }
+        #squash {
+            margin-top: 475px;
+            position: absolute;
+        }
     </style>
     <body id="box">
         <header><a href="../portfolio.html" id="returnLink"><img src="../Icons/CMD.jpg" id="returnP">&lt--</a></header>
@@ -52,6 +60,10 @@
             <button id="rotate" onclick="startR()">Rotate</button>
             <button id="horizontal" onclick="startH()">side-to-side</button>
             <button id="vertical" onclick="startV()">top-to-bottom</button>
+            <button id="squish" onclick="squishRun()">Squish!</button>
+            <button id="squash" onclick="squashRun()">Squash!</button>
+            <!--<button id="changeDeath" onclick="Death()">change icon</button>-->
+            
         </div>
         <img src="../Photos/Pedro.png" id="Pedro">
     </body>
@@ -66,7 +78,10 @@
         var x = 0
         var Vrun = 0;
         var y = 0;
-        var backwards = 60(bW/110);
+        var squish = 0;
+        var pH = 180;
+        var squash = 0;
+        var pW = 90;
         
         function startR() {
             setInterval(Rotate, 25);
@@ -79,6 +94,16 @@
         function startV() {
             setInterval(Upways, 25);
         }
+        function Death() {
+            Pedro.style.zIndex = "-1";
+            //Death.style.opactiy = "100";
+        }
+        function squishRun() {
+            setInterval(Squishfunct, 25);
+        }
+        function squashRun() {
+            setInterval(Squashfunct, 25);
+        }
         
         //transformation scripts
         function Rotate() {
@@ -86,6 +111,7 @@
                 rotate++;
                 deg = 12;
                 Pedro.style.transform = "rotate(" + deg * rotate + "deg)";
+                Death.style.transform = "rotate(" + deg * rotate + "deg)";
             }
         }
         
@@ -94,14 +120,17 @@
                 Hrun++;
                 x = bW/110
                 Pedro.style.left = (x * Hrun) + "px";
+                Death.style.left = (x * Hrun) + "px";
             } else if (Hrun >= 60 && Hrun < 170) {
                 Hrun++;
                 x = bW/110;
                 Pedro.style.left = (60 * x) - (x * (Hrun - 60)) + "px";
+                Death.style.left = (60 * x) - (x * (Hrun - 60)) + "px";
             } else if (Hrun >= 170 && Hrun < 220) {
                 Hrun++;
                 x = bW/110
                 Pedro.style.left = (-110 * x) + (x * (Hrun - 110)) + "px";
+                Death.style.left = (-110 * x) + (x * (Hrun - 110)) + "px";
             } else if (Hrun === 220) {
                 Hrun = 0;
             }
@@ -112,16 +141,43 @@
                 Vrun++;
                 y = bH/100
                 Pedro.style.top = (y * Vrun) + "px";
+                Death.style.top = (y * Vrun) + "px";
             } else if (Vrun >= 20 && Vrun < 100) {
                 Vrun++;
                 y = bH/100
                 Pedro.style.top = (20 * y) - (y * (Vrun - 20)) + "px";
+                Death.style.top = (20 * y) - (y * (Vrun - 20)) + "px";
             } else if (Vrun >= 100 && Vrun < 160) {
                 Vrun++;
                 y = bH/100
                 Pedro.style.top = (-80 * y) + (y * (Vrun - 80)) + "px";
+                Death.style.top = (-80 * y) + (y * (Vrun - 80)) + "px";
             } else if (Vrun === 160) {
                 Vrun = 0;
+            }
+        }
+        
+        function Squishfunct() {
+            if (squish >= 0 && squish < 180) {
+                squish ++;
+                Pedro.style.height = (pH - squish) + "px"
+            } else if (squish >= 180 && squish < 360) {
+                squish ++;
+                Pedro.style.height = (1 + (squish - 180)) + "px";
+            } else if (squish === 360) {
+                squish = 0;
+            }
+        }
+        
+        function Squashfunct() {
+            if (squash >= 0 && squash < 90) {
+                squash ++;
+                Pedro.style.width = (pW - squash) + "px"
+            } else if (squash >= 90 && squash < 180) {
+                squash ++;
+                Pedro.style.width = (1 + (squash - 90)) + "px";
+            } else if (squash === 180) {
+                squash = 0;
             }
         }
     </script>
