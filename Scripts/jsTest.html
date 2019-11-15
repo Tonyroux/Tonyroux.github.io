@@ -46,7 +46,7 @@
             position: absolute;
         }
     </style>
-    <body>
+    <body id="box">
         <header><a href="../portfolio.html" id="returnLink"><img src="../Icons/CMD.jpg" id="returnP">&lt--</a></header>
         <div id="btns">
             <button id="rotate" onclick="startR()">Rotate</button>
@@ -58,12 +58,15 @@
     <script>
         //variables and timers
         var Pedro = document.getElementById("Pedro");
+        var bW = screen.width;
+        var bH = screen.height;
         var rotate = 0
         var deg = 0
-        var Hrun = 0
+        var Hrun = 0;
         var x = 0
         var Vrun = 0;
         var y = 0;
+        var backwards = 60(bW/110);
         
         function startR() {
             setInterval(Rotate, 25);
@@ -89,16 +92,16 @@
         function Sideways() {
             if (Hrun >= 0 && Hrun < 60) {
                 Hrun++;
-                x = 12
+                x = bW/110
                 Pedro.style.left = (x * Hrun) + "px";
             } else if (Hrun >= 60 && Hrun < 170) {
                 Hrun++;
-                x = 12
-                Pedro.style.left = (720 - (x * (Hrun - 60))) + "px";
+                x = bW/110;
+                Pedro.style.left = (60 * x) - (x * (Hrun - 60)) + "px";
             } else if (Hrun >= 170 && Hrun < 220) {
                 Hrun++;
-                x = 12
-                Pedro.style.left = (-1320 + (x * (Hrun - 110))) + "px";
+                x = bW/110
+                Pedro.style.left = (-110 * x) + (x * (Hrun - 110)) + "px";
             } else if (Hrun === 220) {
                 Hrun = 0;
             }
@@ -107,17 +110,17 @@
         function Upways() {
             if (Vrun >= 0 && Vrun < 20) {
                 Vrun++;
-                y = 10
+                y = bH/100
                 Pedro.style.top = (y * Vrun) + "px";
             } else if (Vrun >= 20 && Vrun < 100) {
                 Vrun++;
-                y = 10
-                Pedro.style.top = (240 - (y * (Vrun - 20))) + "px";
-            } else if (Vrun >= 100 && Vrun < 150) {
+                y = bH/100
+                Pedro.style.top = (20 * y) - (y * (Vrun - 20)) + "px";
+            } else if (Vrun >= 100 && Vrun < 160) {
                 Vrun++;
-                y = 10
-                Pedro.style.top = (-725 + (y * (Vrun - 80))) + "px";
-            } else if (Vrun === 150) {
+                y = bH/100
+                Pedro.style.top = (-80 * y) + (y * (Vrun - 80)) + "px";
+            } else if (Vrun === 160) {
                 Vrun = 0;
             }
         }
