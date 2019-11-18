@@ -53,6 +53,10 @@
             margin-top: 475px;
             position: absolute;
         }
+        #z {
+            margin-top: 450px;
+            position: absolute;
+        }
     </style>
     <body id="box">
         <header><a href="../portfolio.html" id="returnLink"><img src="../Icons/CMD.jpg" id="returnP">&lt--</a></header>
@@ -62,6 +66,7 @@
             <button id="vertical" onclick="startV()">top-to-bottom</button>
             <button id="squish" onclick="squishRun()">Squish!</button>
             <button id="squash" onclick="squashRun()">Squash!</button>
+            <button id="z" onclick="startZoom()">front-to-back</button>
             <!--<button id="changeDeath" onclick="Death()">change icon</button>-->
             
         </div>
@@ -82,6 +87,8 @@
         var pH = 180;
         var squash = 0;
         var pW = 90;
+        var zoom = 0;
+        var zoom2 = 0;
         
         function startR() {
             setInterval(Rotate, 25);
@@ -103,6 +110,13 @@
         }
         function squashRun() {
             setInterval(Squashfunct, 25);
+        }
+        function startZoom() {
+            if (zoom >= 0) {
+                zoom ++;
+                setInterval(Squashfunct, 26);
+                setInterval(Squishfunct, 13);
+            }
         }
         
         //transformation scripts
