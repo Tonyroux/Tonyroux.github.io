@@ -4,6 +4,8 @@
     <head>
         <title> Ever Onwards.</title>
         <link rel="icon" href="../Icons/stockoClocko.png" type="image/png">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
     </head>
     <style>
         body {
@@ -49,8 +51,8 @@
             color: black;
             position: absolute;
         }
-        .line {
-            font: Apple Chancery;
+        .w3-tangerine {
+            font-family: "Tangerine", serif;
         }
     </style>
     <body onLoad="start()">
@@ -63,8 +65,8 @@
         </div>
         <span id="wait">Just. Wait.</span>
         <div id="content">
-            <span id="line1" class="line">You cannot stop the clock of time, it marches ever onwards.</span>
-            <span id="line2" class="line">And though we feel we may unwind, the clock will never falter.</span>
+            <span id="line1" class="w3-xxxlarge w3-tangerine">You cannot stop the clock of time, it marches ever onwards.</span>
+            <span id="line2" class="w3-xxxlarge w3-tangerine">And though we feel we may unwind, the clock will never falter.</span>
         </div>
     </body>
     <script id="clock">
@@ -107,7 +109,7 @@
                 s--;
             }
             
-            if (msg === 1) {
+            if (msg === 2) {
                 line1.style.opacity = 1;
             } else if (msg === 3) {
                 line1.style.opacity = 0;
