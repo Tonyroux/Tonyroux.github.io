@@ -77,9 +77,9 @@
 			var posY = 0;
 			var vectorY = 1;
 			var rightWall = boardWidth - boxWidth;
-			var bottomWall = boardHeight + boxHeight;
+			var bottomWall = boardHeight;
 			var clicks = 0;
-			var colors = ["maroon", "red", "olive", "yellow", "orange", "green", "purple", "fuschia", "lime",]
+			var colors = ["maroon", "red", "olive", "yellow", "orange", "green", "purple", "fuschia", "lime", "seagreen", "lightsalmon", "blueviolet", "cadetblue", "chocolate", "coral", "crimson", "cyan", "darkblue", "darkgoldenrod", "darkgreen", "darkmagenta", "darkorange", "darkred", "dark slateblue", "deepskyblue", "deeppink", "gold", "greenyellow", "indianred", "indigo", "mediumorchid", "orangered", "whitesmoke"]
 			var newColor = "";
 			
 			/* 
@@ -102,7 +102,7 @@
 					vectorX = 1;
 				}
 				
-				if (posY + 70 >= bottomWall) {
+				if (posY >= bottomWall) {
 					vectorY = -1;
 				}
 				
