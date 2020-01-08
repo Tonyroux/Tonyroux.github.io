@@ -8,7 +8,7 @@
 		.box {
 			width: 70px;
 			height: 70px;
-			background-color: 255, 255, 255;
+			background-color: teal;
 			font-size: 300%;
 			text-align: center;
 			display: block;
@@ -59,7 +59,7 @@
 			
 			//changes displyed color of the box
 			function changeBoxColor(color) {
-				box.css('background-color', )
+				box.css('background-color', color)
 			}
 
 			//////////////////////////////////////////////////////////////////
@@ -75,6 +75,8 @@
 			var rightWall = boardWidth - boxWidth;
 			var bottomWall = boardHeight + boxHeight;
 			var clicks = 0;
+			var colors = ["maroon", "red", "olive", "yellow", "orange", "green", "purple", "fuschia", "lime",]
+			var newColor = "";
 			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -86,6 +88,7 @@
 				posY = posY + (speed * vectorY);
 				moveBoxTo(posX, posY);
 				changeBoxText(clicks);
+				changeBoxColor(newColor);
 				
 				if (posX >= rightWall) {
 					vectorX = -1;
@@ -95,7 +98,7 @@
 					vectorX = 1;
 				}
 				
-				if (posY >= bottomWall) {
+				if (posY + 70 >= bottomWall) {
 					vectorY = -1;
 				}
 				
@@ -113,8 +116,10 @@
 				speed ++;
 				clicks ++;
 				posX = 0;
+				newColor = colors[Math.floor((Math.random()) * colors.length)];
 				moveBoxTo(0);
 				changeBoxText(clicks);
+				changeBoxColor();
 
 
 			};
