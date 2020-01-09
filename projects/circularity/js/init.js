@@ -22,10 +22,16 @@ var init = function (window) {
         // TODO 1 : Declare and initialize our variables
         var circle;
         var circles = [];
+        var borderRandom = 1
+        var mouse = {
+            x: 0,
+            y: 0
+        }
 
         // TODO 2 : Create a function that draws a circle 
         function drawCircle() {
-            circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+            borderRandom = Math.floor(Math.random() * 5)
+            circle = draw.randomCircleInArea(canvas, true, true, '#999', borderRandom);
             //randomCircleInArea(area, randomizeAlpha, addCross, borderColor, borderThickness, randomRadialProps)  <- parameters
             physikz.addRandomVelocity(circle, canvas);
             view.addChild(circle);
@@ -67,6 +73,21 @@ var init = function (window) {
                  game.checkCirclePosition(circles[circleNum]);
             }
             
+           /* window.onmousemove(function event() {
+                mouse.x = event.pageX;
+                mouse.y = event.pageY;
+            })
+            
+            //mouse.x = window.screenX;
+            //mouse.y = window.screenY;
+            
+            if (pageX === undefined) {
+                pageX = window.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+                pageY = window.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+            }
+            
+            console.log("x: " + mouse.x + ", y: " + mouse.y);*/
+            
         }
     
         /* 
@@ -75,7 +96,8 @@ var init = function (window) {
         it to the opposite side of the screen.
         */
         game.checkCirclePosition = function(circle) {
-
+            
+            
             // if the circle has gone past the RIGHT side of the screen then place it on the LEFT
             if ( circle.x > canvas.width ) {
                 circle.x = 0;
