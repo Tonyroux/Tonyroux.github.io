@@ -27,6 +27,7 @@ var init = function (window) {
             x: 0,
             y: 0
         }
+        var maxCircles = 100;
 
         // TODO 2 : Create a function that draws a circle 
         function drawCircle() {
@@ -39,7 +40,7 @@ var init = function (window) {
         }
 
         // TODO 3 / 7 : Call the drawCircle() function 
-        for (var circleCount = 0; circleCount <= 100; circleCount++) {
+        for (var circleCount = 0; circleCount < maxCircles; circleCount++) {
             drawCircle();
         }
 
@@ -68,7 +69,7 @@ var init = function (window) {
             game.checkCirclePosition(circles[4]);*/
 
             // TODO 8 : Iterate over the array
-            for (var circleNum = 0; circleNum <= 100; circleNum++) {
+            for (var circleNum = 0; circleNum < maxCircles; circleNum++) {
                  physikz.updatePosition(circles[circleNum]);
                  game.checkCirclePosition(circles[circleNum]);
             }
