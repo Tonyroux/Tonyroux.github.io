@@ -111,11 +111,15 @@ var init = function (window) {
             
             //Mouse rebound!!
             if (circle.x + 15 >= mouseX && circle.x - 15 <= mouseX){
-                recentIntercept = true;
-                setInterval(function(){recentIntercept = false;}, 2000);
-                if((circle.y + 15) >= mouseY && (circle.y - 15) <= mouseY){
-                    console.log("intercept circle");
-                    physikz.addRandomVelocity(circle, canvas, 2, 2);
+                if (circle.x + 5 <= mouseX || circle.x - 5 >= mouseX) {
+                    recentIntercept = true;
+                    setInterval(function(){recentIntercept = false;}, 2000);
+                    if(circle.y + 15 >= mouseY && circle.y - 15 <= mouseY){
+                        if (circle.y + 5 <= mouseY || circle.y - 5 >= mouseY) {
+                            console.log("intercept circle");
+                            physikz.addRandomVelocity(circle, canvas, 2, 2);
+                        }
+                    }
                 }
             }
 
