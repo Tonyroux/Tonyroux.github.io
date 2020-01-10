@@ -23,11 +23,10 @@ var init = function (window) {
         var circle;
         var circles = [];
         var borderRandom = 1
-        var mouse = {
-            x: 0,
-            y: 0
-        }
+        var mouseX = 0;
+        var mouseY = 0;
         var maxCircles = 100;
+        var recentIntercept = false;
 
         // TODO 2 : Create a function that draws a circle 
         function drawCircle() {
@@ -74,20 +73,13 @@ var init = function (window) {
                  game.checkCirclePosition(circles[circleNum]);
             }
             
-           /* window.onmousemove(function event() {
-                mouse.x = event.pageX;
-                mouse.y = event.pageY;
+            //Mouse position check
+            $("#canvas").mousemove(function(event) {
+                mouseX = event.pageX;
+                mouseY = event.pageY;
             })
-            
-            //mouse.x = window.screenX;
-            //mouse.y = window.screenY;
-            
-            if (pageX === undefined) {
-                pageX = window.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-                pageY = window.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-            }
-            
-            console.log("x: " + mouse.x + ", y: " + mouse.y);*/
+            //console.log("x: " + mouseX + ", y: " + mouseY);
+            //debugging
             
         }
     
@@ -115,6 +107,16 @@ var init = function (window) {
             
             if (circle.y < 0) {
                 circle.y = canvas.height;
+            }
+            
+            //Mouse rebound!!
+            if (circle.x + 15 >= mouseX && circle.x - 15 <= mouseX){
+                recentIntercept = true;
+                setInterval(function(){recentIntercept = false;}, 2000);
+                if((circle.y + 15) >= mouseY && (circle.y - 15) <= mouseY){
+                    console.log("intercept circle");
+                    physikz.addRandomVelocity(circle, canvas, 2, 2);
+                }
             }
 
 
