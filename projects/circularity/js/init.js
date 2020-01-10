@@ -111,11 +111,11 @@ var init = function (window) {
             
             //Mouse rebound!!
             if (circle.x + 15 >= mouseX && circle.x - 15 <= mouseX){
-                if (circle.x + 5 <= mouseX || circle.x - 5 >= mouseX) {
+                if (circle.x + 2 <= mouseX || circle.x - 2 >= mouseX) {
                     recentIntercept = true;
                     setInterval(function(){recentIntercept = false;}, 2000);
                     if(circle.y + 15 >= mouseY && circle.y - 15 <= mouseY){
-                        if (circle.y + 5 <= mouseY || circle.y - 5 >= mouseY) {
+                        if (circle.y + 2 <= mouseY || circle.y - 2 >= mouseY) {
                             console.log("intercept circle");
                             physikz.addRandomVelocity(circle, canvas, 2, 2);
                         }
