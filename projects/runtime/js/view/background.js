@@ -41,7 +41,10 @@ var background = function (window) {
             _1 : 'assets/Buildings/build_1.png',
             _2 : 'assets/Buildings/build_2.png',
             _3 : 'assets/Buildings/build_3.png',
-            _4 : 'assets/Buildings/build_4.png'
+            _4 : 'assets/Buildings/build_4.png',
+            _5 : 'assets/Buildings/build_5.png',
+            _6 : 'assets/Buildings/build_6.png',
+            _7 : 'assets/Buildings/build_blank.png',
         }
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
@@ -86,7 +89,7 @@ var background = function (window) {
             // TODO: 5 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
             //foregound vs. background, that's why.
             for (var i = 0; i <= 10; i++) {
-                var randBuild = Math.floor(Math.random() * 5);
+                var randBuild = Math.floor(Math.random() * 8);
                 if (randBuild == 0) {
                     buildings[i] = draw.bitmap(builds._0);
                 }
@@ -101,6 +104,15 @@ var background = function (window) {
                 }
                 if (randBuild == 4) {
                     buildings[i] = draw.bitmap(builds._4);
+                }
+                if (randBuild == 5) {
+                    buildings[i] = draw.bitmap(builds._5);
+                }
+                if (randBuild == 6) {
+                    buildings[i] = draw.bitmap(builds._6);
+                }
+                if (randBuild == 7) {
+                    buildings[i] = draw.bitmap(builds._7);
                 }
             }
             for (var i = 0; i < buildings.length; i++) {
@@ -150,7 +162,7 @@ var background = function (window) {
                 
                 if (buildings[i].x < -160) {
                     buildRandom(i);
-                    buildings[i].x = canvasWidth + 160;
+                    buildings[i].x = canvasWidth + 159;
                 }
             }
 
@@ -212,7 +224,7 @@ var background = function (window) {
         }
         
         function buildRandom(buildIndex) {
-            var randBuild = Math.floor(Math.random() * 5);
+            var randBuild = Math.floor(Math.random() * 8);
                 if (randBuild == 0) {
                     background.removeChild(buildings[buildIndex]);
                     buildings[buildIndex] = draw.bitmap(builds._0);
@@ -258,6 +270,35 @@ var background = function (window) {
                     buildings[buildIndex].scaleY = 0.45;
                     background.addChild(buildings[buildIndex]);
                 }
+                else if (randBuild == 5) {
+                    background.removeChild(buildings[buildIndex]);
+                    buildings[buildIndex] = draw.bitmap(builds._5);
+                    buildings[buildIndex].x = canvasWidth;
+                    buildings[buildIndex].y = groundY - 288;
+                    buildings[buildIndex].scaleX = 0.5;
+                    buildings[buildIndex].scaleY = 0.45;
+                    background.addChild(buildings[buildIndex]);
+                }
+                else if (randBuild == 6) {
+                    background.removeChild(buildings[buildIndex]);
+                    buildings[buildIndex] = draw.bitmap(builds._6);
+                    buildings[buildIndex].x = canvasWidth;
+                    buildings[buildIndex].y = groundY - 288;
+                    buildings[buildIndex].scaleX = 0.5;
+                    buildings[buildIndex].scaleY = 0.45;
+                    background.addChild(buildings[buildIndex]);
+                }
+                else if (randBuild == 7) {
+                    background.removeChild(buildings[buildIndex]);
+                    buildings[buildIndex] = draw.bitmap(builds._7);
+                    buildings[buildIndex].x = canvasWidth;
+                    buildings[buildIndex].y = groundY - 288;
+                    buildings[buildIndex].scaleX = 0.5;
+                    buildings[buildIndex].scaleY = 0.45;
+                    background.addChild(buildings[buildIndex]);
+                }
+                
+                
             return buildings[buildIndex];
         }
         
