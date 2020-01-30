@@ -16,9 +16,10 @@ var level01 = function (window) {
             "number": 1, 
             "speed": -3,
             "gameItems": [
-                { "type": "sawblade", "x": 400, "y": groundY },
-                { "type": "sawblade", "x": 600, "y": groundY },
-                { "type": "sawblade", "x": 900, "y": groundY }
+                { "type": "sawblade", "x": 400, "y": 275 },
+                { "type": "sawblade", "x": 600, "y": 350 },
+                { "type": "spikes", "x": 1050, "y": groundY - 25},
+                { "type": "sawblade", "x": 900, "y": 275 }
             ]
         };
         window.levelData = levelData;
@@ -26,7 +27,43 @@ var level01 = function (window) {
         game.setDebugMode(true);
 
         // BEGIN EDITING YOUR CODE HERE
-
+            var key, value;
+            for (key = 0; key <= levelData.gameItems.length-1; key++) {
+                var currItem = levelData.gameItems[key];
+                
+              if (currItem.type === 'sawblade') {
+                    createSawBlade(currItem.x, currItem.y);
+              }
+              if (currItem.type === 'spikes') {
+                  createSpikes(currItem.x, currItem.y);
+              }
+            }
+            function createSawBlade(x, y) {
+                var hitZoneSize = 25;
+                var damageFromObstacle = 10;
+                var sawBladeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
+                sawBladeHitZone.x = x;
+                sawBladeHitZone.y = y;
+                game.addGameItem(sawBladeHitZone);
+                var obstacleImage = draw.bitmap('img/sawblade.png');
+                sawBladeHitZone.addChild(obstacleImage);
+                obstacleImage.x = -25;
+                obstacleImage.y = -25;
+            }
+            function createSpikes(x, y) {
+                var hitZoneSize = 25;
+                var damageFromObstacle = 10;
+                var spikeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
+                spikeHitZone.x = x;
+                spikeHitZone.y = y;
+                game.addGameItem(spikeHitZone);
+                var obstacleImage = draw.bitmap('img/spike.png');
+                spikeHitZone.addChild(obstacleImage);
+                obstacleImage.x = -25;
+                obstacleImage.y = -25;
+                obstacleImage.scaleX = 1;
+                obstacleImage.scaleY = 1;
+            }
         
         
         
