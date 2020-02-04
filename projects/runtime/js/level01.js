@@ -24,7 +24,12 @@ var level01 = function (window) {
                 { "type": "spikes", "x": 1650},
                 { "type": "spikes", "x": 2550},
                 { "type": "reward", "x": 3000},
-                { "type": "enmy1", "x": 400, "y": 20}
+                { "type": "sawblade", "x": 3750, "y": 275 },
+                { "type": "sawblade", "x": 3850, "y": 275 },
+                { "type": "enmy1", "x": 4000, "y": 90},
+                { "type": "spikes", "x": 4250},
+                { "type": "reward", "x": 4650},
+                { "type": "enmy1", "x": 2750, "y": 70}
             ]
         };
         window.levelData = levelData;
@@ -46,7 +51,7 @@ var level01 = function (window) {
                   createEnemy1(currItem.x, currItem.y);
               }
               if (currItem.type === 'reward') {
-                  createReward(currItem.x, groundY - 300);
+                  createReward(currItem.x, groundY - 130);
               }
             }
             function createSawBlade(x, y) {
@@ -88,9 +93,11 @@ var level01 = function (window) {
                 enemy.x = x;
                 enemy.y = groundY - y;
                 game.addGameItem(enemy);
-                enemy.velocityX = -1;
+                enemy.velocityX = -2;
                 enemy.onPlayerCollision = function () {
                     game.changeIntegrity(-30);
+                    enemy.fadeOut(1000);
+                    enemyOver.fadeOut(1000);
                 }
                 enemy.onProjectileCollision = function() {
                     game.increaseScore(100);
@@ -107,21 +114,23 @@ var level01 = function (window) {
                 enemyOver.x = x;
                 enemyOver.y = groundY - y;
                 game.addGameItem(enemyOver);
-                enemyOver.velocityX = -1;
+                enemyOver.velocityX = -2;
             }
             function createReward(x, y) {
                 var reward = game.createGameItem('reward', 10);
                 var coin = draw.bitmap('assets/coin.png');
-                coin.x = -25;
-                coin.y = -25;
-                coin.scaleX = 0.05;
-                coin.scaleY = 0.05;
+                coin.x = -32;
+                coin.y = -32;
+                coin.scaleX = 0.1;
+                coin.scaleY = 0.1;
                 reward.addChild(coin);
                 reward.x = x;
                 reward.y = y;
                 game.addGameItem(reward);
+                reward.velocityX = -2;
                 reward.onPlayerCollision = function() {
                     game.increaseScore(500);
+                    reward.fadeOut();
                 }
             }
         
