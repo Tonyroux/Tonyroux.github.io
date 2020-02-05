@@ -16,6 +16,7 @@ var level01 = function (window) {
             "number": 1, 
             "speed": -3,
             "gameItems": [
+                //level 1
                 { "type": "sawblade", "x": 400, "y": 275 },
                 { "type": "sawblade", "x": 600, "y": 275 },
                 { "type": "sawblade", "x": 3050, "y": 275 },
@@ -29,7 +30,50 @@ var level01 = function (window) {
                 { "type": "enmy1", "x": 4000, "y": 90},
                 { "type": "spikes", "x": 4250},
                 { "type": "reward", "x": 4650},
-                { "type": "enmy1", "x": 2750, "y": 70}
+                
+                //level 2 (feaux mario 1-1)
+                { "type": "sawblade", "x": 5500, "y": 275, "level": 2},
+                { "type": "enmy2", "x": 5600, "y": 70, "level": 2},
+                { "type": "sawblade", "x": 5650, "y": 275, "level": 2},
+                { "type": "sawblade", "x": 5700, "y": 275, "level": 2},
+                { "type": "reward", "x": 5750, "level": 2},
+                { "type": "sawblade", "x": 5800, "y": 275, "level": 2},
+                { "type": "sawblade", "x": 5850, "y": 275, "level": 2},
+                { "type": "spikes", "x": 6000, "level": 2},
+                { "type": "enmy2", "x": 6200, "y": 70, "level": 2},
+                { "type": "spikes", "x": 6300, "level": 2},
+                { "type": "enmy2", "x": 6700, "y": 70, "level": 2},
+                { "type": "enmy2", "x": 6750, "y": 70, "level": 2},
+                { "type": "spikes", "x": 6850, "level": 2},
+                { "type": "enmy2", "x": 7250, "y": 70, "level": 2},
+                { "type": "enmy2", "x": 7300, "y": 70, "level": 2},
+                { "type": "spikes", "x": 7500, "level": 2},
+                { "type": "reward", "x": 7850, "level": 2},
+                { "type": "sawblade", "x": 8250, "y": 275, "level": 2},
+                { "type": "sawblade", "x": 8300, "y": 275, "level": 2},
+                { "type": "reward", "x": 8350, "level": 2},
+                { "type": "sawblade", "x": 8350, "y": 75, "level": 2},
+                { "type": "sawblade", "x": 8400, "y": 75, "level": 2},
+                { "type": "enmy2", "x": 8400, "y": 25, "level": 2},
+                { "type": "enmy2", "x": 8450, "y": 25, "level": 2},
+                { "type": "sawblade", "x": 8450, "y": 75, "level": 2},
+                { "type": "sawblade", "x": 8500, "y": 75, "level": 2},
+                { "type": "sawblade", "x": 8550, "y": 75, "level": 2},
+                { "type": "sawblade", "x": 8600, "y": 75, "level": 2},
+                { "type": "sawblade", "x": 8650, "y": 75, "level": 2},
+                { "type": "sawblade", "x": 8700, "y": 75, "level": 2},
+                { "type": "sawblade", "x": 8700, "y": 275, "level": 2},
+                { "type": "reward", "x": 8750, "level": 2},
+                { "type": "sawblade", "x": 9350, "y": 275, "level": 2},
+                { "type": "sawblade", "x": 9450, "y": 275, "level": 2},
+                { "type": "sawblade", "x": 9450, "y": 75, "level": 2},
+                { "type": "enmy2", "x": 9450, "y": 70, "level": 2},
+                { "type": "enmy3", "x": 9500, "y": 70, "level": 2},
+                { "type": "sawblade", "x": 9550, "y": 275, "level": 2},
+                { "type": "spikes", "x": 10050, "level": 2},
+                { "type": "enmy2", "x": 10500, "y": 70, "level": 2},
+                { "type": "enmy2", "x": 10550, "y": 70, "level": 2},
+                { "type": "reward", "x": 11000, "level": 2}
             ]
         };
         window.levelData = levelData;
@@ -41,18 +85,38 @@ var level01 = function (window) {
             for (key = 0; key <= levelData.gameItems.length-1; key++) {
                 var currItem = levelData.gameItems[key];
                 
-              if (currItem.type === 'sawblade') {
+              if (currItem.level === 2) {
+                  if (currItem.type === 'sawblade') {
                     createSawBlade(currItem.x, currItem.y);
+                  }
+                  if (currItem.type === 'spikes') {
+                      createSpikes(currItem.x, groundY - 25);
+                  }
+                  if (currItem.type === 'enmy2') {
+                      createEnemy1(currItem.x, currItem.y);
+                  }
+                  if (currItem.type === 'enmy3') {
+                      createEnemy1(currItem.x, currItem.y);
+                  }
+                  if (currItem.type === 'reward') {
+                      createReward(currItem.x, 275);
+                  }
               }
-              if (currItem.type === 'spikes') {
-                  createSpikes(currItem.x, groundY - 25);
+              else {
+                  if (currItem.type === 'sawblade') {
+                    createSawBlade(currItem.x, currItem.y);
+                  }
+                  if (currItem.type === 'spikes') {
+                      createSpikes(currItem.x, groundY - 25);
+                  }
+                  if (currItem.type === 'enmy1') {
+                      createEnemy1(currItem.x, currItem.y);
+                  }
+                  if (currItem.type === 'reward') {
+                      createReward(currItem.x, groundY - 130);
+                  }
               }
-              if (currItem.type === 'enmy1') {
-                  createEnemy1(currItem.x, currItem.y);
-              }
-              if (currItem.type === 'reward') {
-                  createReward(currItem.x, groundY - 130);
-              }
+              
             }
             function createSawBlade(x, y) {
                 var hitZoneSize = 20;
