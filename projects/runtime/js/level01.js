@@ -33,20 +33,20 @@ var level01 = function (window) {
                 
                 //level 2 (feaux mario 1-1)
                 { "type": "sawblade", "x": 5500, "y": 275, "level": 2},
-                { "type": "enmy2", "x": 5600, "y": 70, "level": 2},
+                { "type": "enmy2", "x": 5600, "y": 25, "level": 2},
                 { "type": "sawblade", "x": 5650, "y": 275, "level": 2},
                 { "type": "sawblade", "x": 5700, "y": 275, "level": 2},
-                { "type": "reward", "x": 5750, "level": 2},
+                { "type": "reward", "x": 5760, "level": 2},
                 { "type": "sawblade", "x": 5800, "y": 275, "level": 2},
                 { "type": "sawblade", "x": 5850, "y": 275, "level": 2},
                 { "type": "spikes", "x": 6000, "level": 2},
-                { "type": "enmy2", "x": 6200, "y": 70, "level": 2},
+                { "type": "enmy2", "x": 6200, "y": 25, "level": 2},
                 { "type": "spikes", "x": 6300, "level": 2},
-                { "type": "enmy2", "x": 6700, "y": 70, "level": 2},
-                { "type": "enmy2", "x": 6750, "y": 70, "level": 2},
+                { "type": "enmy2", "x": 6700, "y": 25, "level": 2},
+                { "type": "enmy2", "x": 6750, "y": 25, "level": 2},
                 { "type": "spikes", "x": 6850, "level": 2},
-                { "type": "enmy2", "x": 7250, "y": 70, "level": 2},
-                { "type": "enmy2", "x": 7300, "y": 70, "level": 2},
+                { "type": "enmy2", "x": 7250, "y": 25, "level": 2},
+                { "type": "enmy2", "x": 7300, "y": 25, "level": 2},
                 { "type": "spikes", "x": 7500, "level": 2},
                 { "type": "reward", "x": 7850, "level": 2},
                 { "type": "sawblade", "x": 8250, "y": 275, "level": 2},
@@ -54,8 +54,8 @@ var level01 = function (window) {
                 { "type": "reward", "x": 8350, "level": 2},
                 { "type": "sawblade", "x": 8350, "y": 75, "level": 2},
                 { "type": "sawblade", "x": 8400, "y": 75, "level": 2},
-                { "type": "enmy2", "x": 8400, "y": 25, "level": 2},
-                { "type": "enmy2", "x": 8450, "y": 25, "level": 2},
+                { "type": "enmy2", "x": 8400, "y": 345, "level": 2},
+                { "type": "enmy2", "x": 8450, "y": 345, "level": 2},
                 { "type": "sawblade", "x": 8450, "y": 75, "level": 2},
                 { "type": "sawblade", "x": 8500, "y": 75, "level": 2},
                 { "type": "sawblade", "x": 8550, "y": 75, "level": 2},
@@ -67,12 +67,12 @@ var level01 = function (window) {
                 { "type": "sawblade", "x": 9350, "y": 275, "level": 2},
                 { "type": "sawblade", "x": 9450, "y": 275, "level": 2},
                 { "type": "sawblade", "x": 9450, "y": 75, "level": 2},
-                { "type": "enmy2", "x": 9450, "y": 70, "level": 2},
-                { "type": "enmy3", "x": 9500, "y": 70, "level": 2},
+                { "type": "enmy2", "x": 9450, "y": 25, "level": 2},
+                { "type": "enmy3", "x": 9500, "y": 25, "level": 2},
                 { "type": "sawblade", "x": 9550, "y": 275, "level": 2},
                 { "type": "spikes", "x": 10050, "level": 2},
-                { "type": "enmy2", "x": 10500, "y": 70, "level": 2},
-                { "type": "enmy2", "x": 10550, "y": 70, "level": 2},
+                { "type": "enmy2", "x": 10500, "y": 25, "level": 2},
+                { "type": "enmy2", "x": 10550, "y": 25, "level": 2},
                 { "type": "reward", "x": 11000, "level": 2}
             ]
         };
@@ -87,19 +87,19 @@ var level01 = function (window) {
                 
               if (currItem.level === 2) {
                   if (currItem.type === 'sawblade') {
-                    createSawBlade(currItem.x, currItem.y);
+                    createSawBlade(currItem.x, currItem.y, 2);
                   }
                   if (currItem.type === 'spikes') {
-                      createSpikes(currItem.x, groundY - 25);
+                      createSpikes(currItem.x, groundY - 25, 2);
                   }
                   if (currItem.type === 'enmy2') {
-                      createEnemy1(currItem.x, currItem.y);
+                      createEnemy1(currItem.x, currItem.y, 2);
                   }
                   if (currItem.type === 'enmy3') {
-                      createEnemy1(currItem.x, currItem.y);
+                      createEnemy1(currItem.x, currItem.y, 3);
                   }
                   if (currItem.type === 'reward') {
-                      createReward(currItem.x, 275);
+                      createReward(currItem.x, 275, 2);
                   }
               }
               else {
@@ -110,7 +110,7 @@ var level01 = function (window) {
                       createSpikes(currItem.x, groundY - 25);
                   }
                   if (currItem.type === 'enmy1') {
-                      createEnemy1(currItem.x, currItem.y);
+                      createEnemy1(currItem.x, currItem.y, 1);
                   }
                   if (currItem.type === 'reward') {
                       createReward(currItem.x, groundY - 130);
@@ -118,26 +118,40 @@ var level01 = function (window) {
               }
               
             }
-            function createSawBlade(x, y) {
+            function createSawBlade(x, y, level) {
                 var hitZoneSize = 20;
                 var damageFromObstacle = 10;
                 var sawBladeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
+                var obstacleImage;
                 sawBladeHitZone.x = x;
                 sawBladeHitZone.y = y;
                 game.addGameItem(sawBladeHitZone);
-                var obstacleImage = draw.bitmap('img/sawblade.png');
+                if (level === 2) {
+                    obstacleImage = draw.bitmap('assets/feaux_brick.png');
+                    obstacleImage.scaleX = 0.1;
+                    obstacleImage.scaleY = 0.1;
+                }
+                else {
+                    obstacleImage = draw.bitmap('img/sawblade.png');
+                }
                 sawBladeHitZone.addChild(obstacleImage);
                 obstacleImage.x = -25;
                 obstacleImage.y = -25;
             }
-            function createSpikes(x, y) {
+            function createSpikes(x, y, level) {
                 var hitZoneSize = 25;
                 var damageFromObstacle = 10;
                 var spikeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
+                var obstacleImage;
                 spikeHitZone.x = x;
                 spikeHitZone.y = y;
                 game.addGameItem(spikeHitZone);
-                var obstacleImage = draw.bitmap('assets/spikes.png');
+                if (level === 2) {
+                    obstacleImage = draw.bitmap('assets/feaux_pipe.png');
+                }
+                else {
+                    obstacleImage = draw.bitmap('assets/spikes.png');
+                }
                 spikeHitZone.addChild(obstacleImage);
                 obstacleImage.x = -50;
                 obstacleImage.y = -75;
@@ -145,15 +159,45 @@ var level01 = function (window) {
                 obstacleImage.scaleY = 0.2;
             }
             
-            function createEnemy1(x, y) {
+            function createEnemy1(x, y, level) {
                 var enemy =  game.createGameItem('enemy',50);
-                var hammer = draw.bitmap('assets/hammer.png');
-                hammer.x = 0;
-                hammer.y = 0;
-                hammer.scaleX = 0.2;
-                hammer.scaleY = 0.2;
-                enemy.rotationalVelocity = -10;
-                enemy.addChild(hammer);
+                var enemyOver;
+                if (level === 1) {
+                    var hammer = draw.bitmap('assets/hammer.png');
+                    hammer.x = 0;
+                    hammer.y = 0;
+                    hammer.scaleX = 0.2;
+                    hammer.scaleY = 0.2;
+                    enemy.rotationalVelocity = -10;
+                    enemy.addChild(hammer);
+                    enemyOver =  game.createGameItem('enemy',50);
+                    var gnome = draw.bitmap('assets/gnome.png');
+                    gnome.x = 10;
+                    gnome.y = -50;
+                    gnome.scaleX = 0.2;
+                    gnome.scaleY = 0.2;
+                    enemyOver.addChild(gnome);
+                    enemyOver.x = x;
+                    enemyOver.y = groundY - y;
+                    game.addGameItem(enemyOver);
+                    enemyOver.velocityX = -2;
+                }
+                if (level === 2) {
+                    var goomba = draw.bitmap('assets/feaux_goomb.png');
+                    goomba.x = -25;
+                    goomba.y = -25;
+                    goomba.scaleX = 0.1;
+                    goomba.scaleY = 0.1;
+                    enemy.addChild(goomba);
+                }
+                if (level === 3) {
+                    var koopa = draw.bitmap('assets/feaux_koop.png');
+                    koopa.x = -25;
+                    koopa.y = -25;
+                    koopa.scaleX = 0.1;
+                    koopa.scaleY = 0.1;
+                    enemy.addChild(koopa);
+                }
                 enemy.x = x;
                 enemy.y = groundY - y;
                 game.addGameItem(enemy);
@@ -168,21 +212,16 @@ var level01 = function (window) {
                     enemy.shrink();
                     enemyOver.shrink();
                 }
-                var enemyOver =  game.createGameItem('enemy',50);
-                var gnome = draw.bitmap('assets/gnome.png');
-                gnome.x = 10;
-                gnome.y = -50;
-                gnome.scaleX = 0.2;
-                gnome.scaleY = 0.2;
-                enemyOver.addChild(gnome);
-                enemyOver.x = x;
-                enemyOver.y = groundY - y;
-                game.addGameItem(enemyOver);
-                enemyOver.velocityX = -2;
             }
-            function createReward(x, y) {
+            function createReward(x, y, level) {
                 var reward = game.createGameItem('reward', 10);
-                var coin = draw.bitmap('assets/coin.png');
+                var coin;
+                if (level === 2) {
+                    coin = draw.bitmap('assets/feaux_coin.png');
+                }
+                else {
+                    coin = draw.bitmap('assets/coin.png');
+                }
                 coin.x = -32;
                 coin.y = -32;
                 coin.scaleX = 0.1;
