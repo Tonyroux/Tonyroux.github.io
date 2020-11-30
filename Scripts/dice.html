@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="icon" href="../Icons/die.png" type="image/png">
+    <title>Dice App</title>
+    <style>
+        #die1 {
+            height: 100px;
+            width: 100px;
+            background-color: lightgray; /* feel free to change this */
+            border-radius: 5px;
+            position: relative;
+        }
+        #die2 {
+            height: 100px;
+            width: 100px;
+            background-color: lightgray; /* feel free to change this */
+            border-radius: 5px;
+            position: relative;
+            left: 125px;
+            top: -100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="die1"></div>
+    <div id="die2"></div>
+</body>
+<script>
+    function makeDot(x, y, die) {
+        $('<div class="' + die +'">')
+            .css("height", 15)
+            .css("width", 15)
+            .css("background-color", "black")
+            .css("border-radius", 90)
+            .css("position", "absolute")
+            .css('top', y)
+            .css('left', x)
+            .appendTo("#die" + die + "");
+    }
+    
+    function RNG() {
+        var num = Math.ceil(Math.random() * 6);
+        var num2 = Math.ceil(Math.random() * 6);
+        if (num == 1) {
+            $('.1').detach();
+            makeDot(42.5, 42.5, '1');
+        }
+        else if (num == 2) {
+            $('.1').detach();
+            makeDot(20, 20, '1');
+            makeDot(65, 65, '1');
+        }
+        else if (num == 3) {
+            $('.1').detach();
+            makeDot(65, 20, '1');
+            makeDot(42.5, 42.5, '1');
+            makeDot(20, 65, '1');
+        }
+        else if (num == 4) {
+            $('.1').detach();
+            makeDot(20, 20, '1');
+            makeDot(65, 20, '1');
+            makeDot(20, 65, '1');
+            makeDot(65, 65, '1');
+        }
+        else if (num == 5) {
+            $('.1').detach();
+            makeDot(20, 20, '1');
+            makeDot(65, 20, '1');
+            makeDot(42.5, 42.5, '1');
+            makeDot(20, 65, '1');
+            makeDot(65, 65, '1');
+        }
+        else if (num == 6) {
+            $('.1').detach();
+            makeDot(20, 20, '1');
+            makeDot(65, 20, '1');
+            makeDot(20, 42.5, '1');
+            makeDot(65, 42.5, '1');
+            makeDot(20, 65, '1');
+            makeDot(65, 65, '1');
+        }
+
+        if (num2 == 1) {
+            $('.2').detach();
+            makeDot(42.5, 42.5, '2');
+        }
+        else if (num2 == 2) {
+            $('.2').detach();
+            makeDot(20, 20, '2');
+            makeDot(65, 65, '2');
+        }
+        else if (num2 == 3) {
+            $('.2').detach();
+            makeDot(65, 20, '2');
+            makeDot(42.5, 42.5, '2');
+            makeDot(20, 65, '2');
+        }
+        else if (num2 == 4) {
+            $('.2').detach();
+            makeDot(20, 20, '2');
+            makeDot(65, 20, '2');
+            makeDot(20, 65, '2');
+            makeDot(65, 65, '2');
+        }
+        else if (num2 == 5) {
+            $('.2').detach();
+            makeDot(20, 20, '2');
+            makeDot(65, 20, '2');
+            makeDot(42.5, 42.5, '2');
+            makeDot(20, 65, '2');
+            makeDot(65, 65, '2');
+        }
+        else if (num2 == 6) {
+            $('.2').detach();
+            makeDot(20, 20, '2');
+            makeDot(65, 20, '2');
+            makeDot(42.5, 20, '2');
+            makeDot(42.5, 65, '2');
+            makeDot(20, 65, '2');
+            makeDot(65, 65, '2');
+        }
+    }
+
+    $(window).on('click', RNG);
+
+    
+</script>
+</html>
