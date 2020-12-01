@@ -1,0 +1,23 @@
+its using content delivery because some people consider it more efficient than using a direct downloaded file,\
+even thought a direct file will never change or become a dead link, both resulting in broken code, because the developer edits them
+hence why I always use direct download, especially for major things like libraries or frameworks :)
+
+It doesn't work because the "$" short hand is defined by the jquery library
+if you don't load the jquery library first, than $ has no definition
+and thus does not work
+
+
+
+ultimately, I prefer this method of scripting because it restricts each file to one codeing language and drastically simplifies
+the process of following the stack through each pass of the file, which is especially helpful for debugging 
+(even though there was none to be done here)
+I will admit some of the refactoring was a little over the top, especially in moving 2 if conditionals to be their own function 
+instead of just leaving it in update to be called at the same rate and efficiency anyway. so to some degree this was a waste, 
+but it does hold value in larger project like wardenclyffe, where things like coin collection are handled by a helper function 
+to be entirely reusable.
+There are however small cons that present a bit of a learning curve, especially to those who started by coding in one file
+(I didn't actually know you could put css and js in html files, I've never done it that way.)
+The biggest curve though is having to transition between the two and define variable across all three files instead of having
+them be accessible by default within one filethere's usually a way around it however, so it isn't awful
+like jquery
+jquery is super useful for identifying and defining html "variables" (elements) in separate js files
