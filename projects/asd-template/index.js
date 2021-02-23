@@ -8,7 +8,7 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
 
   // Constant Variables
-  var FRAME_RATE = 60;
+  var FRAME_RATE = 10;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
 
   var KEY = {
@@ -22,9 +22,11 @@ function runProgram(){
   // Game Item Objects
 
   var positionX = 0; // the x-coordinate location for the box
-  var speedX = 5; // the speed for the box along the x-axis
-  var positionY = 0; // the y-coordinate location for the box
-  var speedY = 5; // the speed for the box along the y-axis
+  var velocityX = 0; // the velocity for the box along the x-axis
+  var positionY = 100; // the y-coordinate location for the box
+  var velocityY = -20; // the velocity for the box along the y-axis
+  var newPosX = positionX;
+  var newPosY = positionY;
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -39,7 +41,7 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    redrawGameItem();
+    redrawGameItem("#gameItem");
 
   }
   
@@ -50,29 +52,35 @@ function runProgram(){
     if (event.which == KEY.UP) {
       console.log("up");
       if (positionY > 0) {
-        positionY -= speedY;
+        velocityY = -20;
+        velocityX = 0;
       }
     }
     if (event.which == KEY.DOWN) {
       console.log("down");
       if (positionY < 390) {
-        positionY += speedY;
+        velocityY = 20;
+        velocityX = 0;
       }
     }
     if (event.which == KEY.RIGHT) {
       console.log("right");
       if (positionX < 390) {
-        positionX += speedX;
+        velocityY = 0;
+        velocityX = 20;
       }
     }
     if (event.which == KEY.LEFT) {
       console.log("left");
       if (positionX > 0) {
-        positionX -= speedX;
+        velocityY = 0;
+        velocityX = -20;
       }
     }
     if (event.which == KEY.ENTER) {
       console.log("enter");
+      velocityY = 0;
+      velocityX = 0;
     }
   }
 
@@ -93,9 +101,15 @@ function runProgram(){
 
   }
 
-  function redrawGameItem() {
-    $("#gameItem").css("left", positionX);
-    $("#gameItem").css("top", positionY);
+  function redrawGameItem(item) {
+    if (newPosX + velocityX < 440 && newPosX + velocityX > 0) {
+      newPosX += velocityX;
+    }
+    if (newPosY + velocityY < 440 && newPosY + velocityY > 0) {
+      newPosY += velocityY;
+    }
+    $(item).css("left", newPosX);
+    $(item).css("top", newPosY);
   }
   
 }
