@@ -24,7 +24,7 @@ function runProgram(){
   var positionX = 0; // the x-coordinate location for the box
   var velocityX = 0; // the velocity for the box along the x-axis
   var positionY = 100; // the y-coordinate location for the box
-  var velocityY = -20; // the velocity for the box along the y-axis
+  var velocityY = 0; // the velocity for the box along the y-axis
   var newPosX = positionX;
   var newPosY = positionY;
 
@@ -41,7 +41,7 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    redrawGameItem("#gameItem");
+    redrawGameItem("#snakeHead");
 
   }
   
@@ -51,28 +51,28 @@ function runProgram(){
   function handleKeyDown(event) {
     if (event.which == KEY.UP) {
       console.log("up");
-      if (positionY > 0) {
+      if (positionY > 0 && velocityY == 0) {
         velocityY = -20;
         velocityX = 0;
       }
     }
     if (event.which == KEY.DOWN) {
       console.log("down");
-      if (positionY < 390) {
+      if (positionY < 390 && velocityY == 0) {
         velocityY = 20;
         velocityX = 0;
       }
     }
     if (event.which == KEY.RIGHT) {
       console.log("right");
-      if (positionX < 390) {
+      if (positionX < 390 && velocityX == 0) {
         velocityY = 0;
         velocityX = 20;
       }
     }
     if (event.which == KEY.LEFT) {
       console.log("left");
-      if (positionX > 0) {
+      if (positionX > 0 && velocityX == 0) {
         velocityY = 0;
         velocityX = -20;
       }
@@ -102,14 +102,19 @@ function runProgram(){
   }
 
   function redrawGameItem(item) {
-    if (newPosX + velocityX < 440 && newPosX + velocityX > 0) {
+    //newPosX = $(item).css("left");
+    //newPosY = $(item).css("top");
+    if (newPosX + velocityX < 440 && newPosX + velocityX >= 0) {
       newPosX += velocityX;
     }
-    if (newPosY + velocityY < 440 && newPosY + velocityY > 0) {
+    if (newPosY + velocityY < 440 && newPosY + velocityY >= 0) {
       newPosY += velocityY;
     }
+    console.log("newPosX: " + newPosX + ", newPosY: " + newPosY + ", velY: " + velocityY + ", velX: " + velocityX);
     $(item).css("left", newPosX);
     $(item).css("top", newPosY);
+    positionX = newPosX;
+    positionY = newPosY;
   }
   
 }
