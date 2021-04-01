@@ -40,7 +40,6 @@ function runProgram(){
   */
   function newFrame() {
     redrawGameItem();
-
   }
   
   /* 
