@@ -1,7 +1,8 @@
 
 body {
-  background-color: rgb(146, 194, 209);
+  background-color: rgb(0,0,0);
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 #board {
@@ -10,8 +11,19 @@ body {
   top: 50px;
   left: 15%;
   border: 1px solid white;
-  background-color: black;
+  background-color: rgba(0,0,0,0);
   position: absolute;
+  z-index: 3;
+}
+
+#crt {
+  width: 100%;
+  height: 100%;
+  color: black;
+  background-image: url("angryimg.png");
+  background-size: 7px;
+  position: absolute;
+  z-index: 2;
 }
 
 #topPad {
@@ -36,6 +48,60 @@ body {
   position: absolute;
   background-color: white;
   border-radius: 30px;
+}
+
+#score1 {
+  position: absolute;
+  color: white;
+  left: -3.5%;
+  font-size: x-large;
+  font-family: fantasy;
+}
+
+#score2 {
+  position: absolute;
+  color: white;
+  left: 101%;
+  bottom: 0%;
+  font-size: x-large;
+  font-family: fantasy;
+}
+
+#winner {
+  position: absolute;
+  bottom: -100%;
+  color: white;
+  font-size: x-large;
+  font-family: fantasy;
+  z-index: 3;
+}
+
+#playAgain {
+  position:absolute;
+  color: white;
+  font-family: fantasy;
+  background-color: rgb(0,0,0);
+  width: 10%;
+  height: 5%;
+  border-radius: 50px;
+  bottom: -100%;
+  z-index: 3;
+}
+
+#oldSchool {
+  position:absolute;
+  color: white;
+  font-family: fantasy;
+  background-color: rgb(0,0,0);
+  width: 10%;
+  height: 5%;
+  border-radius: 50px;
+  bottom: 0%;
+  z-index: 3;
+}
+
+.game {
+  z-index: 3;
 }
 
 /*#gameItem {
