@@ -100,6 +100,18 @@ body {
   z-index: 3;
 }
 
+#challenge {
+  position:absolute;
+  color: white;
+  font-family: fantasy;
+  background-color: rgb(0,0,0);
+  width: 10%;
+  height: 5%;
+  border-radius: 50px;
+  bottom: 10%;
+  z-index: 3;
+}
+
 .game {
   z-index: 3;
 }
