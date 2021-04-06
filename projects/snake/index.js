@@ -20,13 +20,40 @@ function runProgram(){
   }
   
   // Game Item Objects
+  
+  function makeItem(x, y, velX, velY, id) {
+    var itemInstance = {
+      x: x * 20,
+      y: y * 20,
+      prevX: x * 20,
+      prevY: y * 20,
+      width: $(id).width(),
+      originalW: $(id).width(),
+      height: $(id).height(),
+      left: x * 20,
+      right: (x * 20) + $(id).width(),
+      top: y * 20,
+      bottom: (y * 20) + $(id).height(),
+      speedX: velX,
+      speedY: velY,
+      id: id
+    };
+    return itemInstance;
+  }
 
-  var positionX = 0; // the x-coordinate location for the box
-  var velocityX = 0; // the velocity for the box along the x-axis
-  var positionY = 100; // the y-coordinate location for the box
-  var velocityY = 0; // the velocity for the box along the y-axis
-  var newPosX = positionX;
-  var newPosY = positionY;
+  var fruit = makeItem(Math.floor(Math.random() * 20), Math.floor(Math.random() * 20), 0, 0, "#fruit");
+  repositionFruit();
+
+  var snakeHead = makeItem(5, 6, 20, 0, "#snakeHead");
+
+  var snakeTotal = [snakeHead];
+
+  for (var i = 0; i < 3; i++) {
+    $('<div id="snakeBody' + i + '" class = "snake"></div>').insertAfter("#snakeHead");
+    snakeTotal.push(makeItem(5, (snakeTotal[i].y / 20) + 1, 0, 0, "#snakeBody" + i))
+  }
+
+  var snakeLength = snakeTotal.length;
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -41,8 +68,11 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    redrawGameItem("#snakeHead");
-
+    snakeLength = snakeTotal.length;
+    redrawGameItem(snakeTotal);
+    checkWalls(snakeTotal);
+    checkSelf(snakeTotal);
+    checkFruit(snakeTotal, fruit);
   }
   
   /* 
@@ -51,36 +81,36 @@ function runProgram(){
   function handleKeyDown(event) {
     if (event.which == KEY.UP) {
       console.log("up");
-      if (positionY > 0 && velocityY == 0) {
-        velocityY = -20;
-        velocityX = 0;
+      if (snakeHead.speedY == 0) {
+        snakeHead.speedY = -20;
+        snakeHead.speedX = 0;
       }
     }
     if (event.which == KEY.DOWN) {
       console.log("down");
-      if (positionY < 390 && velocityY == 0) {
-        velocityY = 20;
-        velocityX = 0;
+      if (snakeHead.speedY == 0) {
+        snakeHead.speedY = 20;
+        snakeHead.speedX = 0;
       }
     }
     if (event.which == KEY.RIGHT) {
       console.log("right");
-      if (positionX < 390 && velocityX == 0) {
-        velocityY = 0;
-        velocityX = 20;
+      if (snakeHead.speedX == 0) {
+        snakeHead.speedY = 0;
+        snakeHead.speedX = 20;
       }
     }
     if (event.which == KEY.LEFT) {
       console.log("left");
-      if (positionX > 0 && velocityX == 0) {
-        velocityY = 0;
-        velocityX = -20;
+      if (snakeHead.speedX == 0) {
+        snakeHead.speedY = 0;
+        snakeHead.speedX = -20;
       }
     }
     if (event.which == KEY.ENTER) {
       console.log("enter");
-      velocityY = 0;
-      velocityX = 0;
+      snakeHead.speedY = 0;
+      snakeHead.speedX = 0;
     }
   }
 
@@ -97,24 +127,69 @@ function runProgram(){
     $(document).off();
   }
 
-  function repositionGameItem() {
-
+  function repositionFruit() {
+    fruit = makeItem(Math.floor(Math.random() * 20), Math.floor(Math.random() * 20), 0, 0, "#fruit");
+    $(fruit.id).css("left", fruit.x);
+    $(fruit.id).css("top", fruit.y);
   }
 
-  function redrawGameItem(item) {
-    //newPosX = $(item).css("left");
-    //newPosY = $(item).css("top");
-    if (newPosX + velocityX < 440 && newPosX + velocityX >= 0) {
-      newPosX += velocityX;
+  function redrawGameItem(snake) {
+    for (var i = 0; i < snakeLength; i++) {
+      let obj = snake[i]
+
+      if (obj == snake[0]) {
+          obj.prevX = obj.x
+          obj.x += obj.speedX;
+
+          obj.prevY = obj.y
+          obj.y += obj.speedY;
+      }
+
+      else {
+        obj.prevX = obj.x;
+        obj.x = snake[i - 1].prevX;
+        obj.prevY = obj.y;
+        obj.y = snake[i - 1].prevY;
+        if ($(obj.id).css("z-index") == -2) {
+          $(obj.id).css("z-index", 1)
+        }
+      }
+      
+      //console.log("newPosX: " + newPosX + ", newPosY: " + newPosY + ", velY: " + velocityY + ", velX: " + velocityX);
+      $(obj.id).css("left", obj.x);
+      $(obj.id).css("top", obj.y);
     }
-    if (newPosY + velocityY < 440 && newPosY + velocityY >= 0) {
-      newPosY += velocityY;
+  }
+
+  function checkWalls(snake) {
+    let obj = snake[0];
+
+    if (obj.x < 0 || obj.x > 420 || obj.y < 0 || obj.y > 420) {
+      endGame();
     }
-    console.log("newPosX: " + newPosX + ", newPosY: " + newPosY + ", velY: " + velocityY + ", velX: " + velocityX);
-    $(item).css("left", newPosX);
-    $(item).css("top", newPosY);
-    positionX = newPosX;
-    positionY = newPosY;
+  }
+
+  function checkSelf(snake) {
+    let head = snake[0];
+
+    for (var i = 1; i < snakeLength; i++) {
+      if (head.x == snake[i].x && head.y == snake[i].y) {
+        endGame();
+      }
+    }
   }
   
+  function checkFruit(snake, fruit) {
+    let head = snake[0];
+
+    if (head.x == fruit.x && head.y == fruit.y) {
+      addSegment();
+      repositionFruit();
+    }
+  }
+
+  function addSegment () {
+    $('<div id="snakeBody' + (snakeTotal.length - 1) + '" class = "snake" style= "z-index: -2;"></div>').insertAfter("#snakeHead");
+    snakeTotal.push(makeItem(snakeTotal[snakeTotal.length - 1].prevX / 20, snakeTotal[snakeTotal.length - 1].prevY / 20, 0, 0, "#snakeBody" + (snakeTotal.length - 1)))
+  }
 }

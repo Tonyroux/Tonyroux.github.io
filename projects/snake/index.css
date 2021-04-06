@@ -7,11 +7,11 @@ body {
   width: 440px;
   height: 440px;
   border: 1px solid white;
-  background-color: black;
+  background-image: url("checkers.png");
   position: relative;
 }
 
-#gameItem {
+#fruit {
   background-color: red;
   width: 20px;
   height: 20px;
