@@ -4,8 +4,8 @@ body {
 }
 
 #board {
-  width: 440px;
-  height: 440px;
+  width: 680px;
+  height: 560px;
   border: 1px solid white;
   background-image: url("checkers.png");
   position: relative;

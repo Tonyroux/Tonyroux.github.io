@@ -55,6 +55,11 @@ function runProgram(){
 
   var snakeLength = snakeTotal.length;
 
+  var canLeft = false;
+  var canRight = true;
+  var canUp = true;
+  var canDown = true;
+
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
@@ -81,28 +86,28 @@ function runProgram(){
   function handleKeyDown(event) {
     if (event.which == KEY.UP) {
       console.log("up");
-      if (snakeHead.speedY == 0) {
+      if (snakeHead.speedY == 0 && canUp) {
         snakeHead.speedY = -20;
         snakeHead.speedX = 0;
       }
     }
     if (event.which == KEY.DOWN) {
       console.log("down");
-      if (snakeHead.speedY == 0) {
+      if (snakeHead.speedY == 0 && canDown) {
         snakeHead.speedY = 20;
         snakeHead.speedX = 0;
       }
     }
     if (event.which == KEY.RIGHT) {
       console.log("right");
-      if (snakeHead.speedX == 0) {
+      if (snakeHead.speedX == 0 && canRight) {
         snakeHead.speedY = 0;
         snakeHead.speedX = 20;
       }
     }
     if (event.which == KEY.LEFT) {
       console.log("left");
-      if (snakeHead.speedX == 0) {
+      if (snakeHead.speedX == 0 && canLeft) {
         snakeHead.speedY = 0;
         snakeHead.speedX = -20;
       }
@@ -164,7 +169,7 @@ function runProgram(){
   function checkWalls(snake) {
     let obj = snake[0];
 
-    if (obj.x < 0 || obj.x > 420 || obj.y < 0 || obj.y > 420) {
+    if (obj.x < 0 || obj.x > $("#board").width() - 20 || obj.y < 0 || obj.y > $("#board").height() - 20) {
       endGame();
     }
   }
@@ -177,6 +182,11 @@ function runProgram(){
         endGame();
       }
     }
+
+    head.x > head.prevX ? canLeft = false : canLeft = true;
+    head.x < head.prevX ? canRight = false : canRight = true;
+    head.y > head.prevY ? canUp = false : canUp = true;
+    head.y < head.prevY ? canDown = false : canDown = true;
   }
   
   function checkFruit(snake, fruit) {
