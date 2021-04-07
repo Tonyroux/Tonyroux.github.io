@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pong!</title>
+    <!-- Load CSS files -->
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="icon" href="angryimg.png" type="image/png">
+    
+    <!-- Load JavaScript files -->
+    <script src="jquery.min.js"></script>
+    <script src="index.js"></script>
+  </head>
+  
+  <body>
+    <div id = 'board'>
+      <div id= 'crt'></div>
+      <div id = 'ball' class="game"></div>
+      <div id = 'bottomPad' class="game"></div>
+      <div id = 'topPad' class="game"></div>
+      <div id = "score1">0</div>
+      <div id = "score2">0</div>
+      <h1 id = "winner"></h1>
+      <button id = "playAgain" onClick = "window.location.reload();"> Play Again? </button>
+    </div>
+
+    <button id="oldSchool"> CRT filter? </button>
+    <button id="challenge"> Too easy? </button>
+  </body>
+</html>

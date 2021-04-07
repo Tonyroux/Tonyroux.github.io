@@ -1,5 +1,5 @@
 {
-    "projects": [
+    "projects":[
         {
             "name":"platformer",
             "title":"Platformer",
@@ -25,7 +25,7 @@
             "date":"Thursday, January 9, 2020"
         },
         {
-            "name":"asd-template",
+            "name":"snake",
             "title":"Snake",
             "description":"It's snake!... it's... snake... hm",
             "date":"Tuesday, February 23, 2021"
@@ -37,10 +37,10 @@
             "date":"Wednesday, April 7, 2021"
         },
         {
-            "name":"pong",
+            "name":"pong2",
             "title":"Pong",
-            "description":"It's Pong! Is it? Something's off...",
-            "date":"Thursday, April 1, 2021"
+            "description":"Ping!",
+            "date":"Friday, April 2, 2021"
         }
     ]
 }

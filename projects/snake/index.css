@@ -4,14 +4,14 @@ body {
 }
 
 #board {
-  width: 440px;
-  height: 440px;
+  width: 680px;
+  height: 560px;
   border: 1px solid white;
-  background-color: black;
+  background-image: url("checkers.png");
   position: relative;
 }
 
-#gameItem {
+#fruit {
   background-color: red;
   width: 20px;
   height: 20px;
@@ -34,4 +34,12 @@ body {
   width: 20px;
   height: 20px;
   position: absolute
+}
+
+#score {
+  position: absolute;
+  color: white;
+  left: 103%;
+  font-size: x-large;
+  font-family: fantasy;
 }
