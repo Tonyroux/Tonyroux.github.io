@@ -185,11 +185,16 @@ function runProgram(){
     if (head.x == fruit.x && head.y == fruit.y) {
       addSegment();
       repositionFruit();
+      updateScore();
     }
   }
 
   function addSegment () {
     $('<div id="snakeBody' + (snakeTotal.length - 1) + '" class = "snake" style= "z-index: -2;"></div>').insertAfter("#snakeHead");
     snakeTotal.push(makeItem(snakeTotal[snakeTotal.length - 1].prevX / 20, snakeTotal[snakeTotal.length - 1].prevY / 20, 0, 0, "#snakeBody" + (snakeTotal.length - 1)))
+  }
+
+  function updateScore(){
+    $("#score").text(snakeTotal.length - 4);
   }
 }

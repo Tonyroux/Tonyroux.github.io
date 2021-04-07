@@ -35,3 +35,11 @@ body {
   height: 20px;
   position: absolute
 }
+
+#score {
+  position: absolute;
+  color: white;
+  left: 103%;
+  font-size: x-large;
+  font-family: fantasy;
+}
