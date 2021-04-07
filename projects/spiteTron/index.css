@@ -1,0 +1,45 @@
+
+body {
+  background-color: darkgreen;
+}
+
+#board {
+  width: 680px;
+  height: 560px;
+  border: 1px solid white;
+  background-image: url("checkers.png");
+  position: relative;
+}
+
+#fruit {
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+/*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
+/*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
+}
+
+#snakeHead {
+  background-color: darkgreen;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 100px;   /* Uncomment if you want to set a "starting" position */
+  top: 100px;    /* Uncomment if you want to set a "starting" position */
+}
+
+.snake {
+  background-color: green;
+  width: 20px;
+  height: 20px;
+  position: absolute
+}
+
+#score {
+  position: absolute;
+  color: white;
+  left: 103%;
+  font-size: x-large;
+  font-family: fantasy;
+}
