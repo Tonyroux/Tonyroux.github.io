@@ -25,7 +25,7 @@ function runProgram(){
   
   // Game Item Objects
   
-  function makeItem(x, y, velX, velY, id, color) {
+  function makeItem(x, y, velX, velY, id, color, scoreText, score) {
     var itemInstance = {
       x: x * 20,
       y: y * 20,
@@ -47,23 +47,26 @@ function runProgram(){
       canUp: velY > 0 ? false : true,
       canDown: velY < 0 ? false : true, 
       color: color,
+      scoreText: scoreText,
     };
     return itemInstance;
   }
 
-  var bike1 = makeItem(3, 3, 20, 0, "#bike1", "rgb(242, 225, 94)");
+  var bike1 = makeItem(3, 3, 20, 0, "#bike1", "rgb(242, 225, 94)", "Player 1: ");
 
   var player1 = [bike1];
 
-  var playerLength1 = player1.length;
-
-  var bike2 = makeItem(12, 9, -20, 0, "#bike2", "rgb(103, 198, 249)");
+  var bike2 = makeItem(($("#board").width() / 20) - 4, ($("#board").height() / 20) - 4, -20, 0, "#bike2", "rgb(103, 198, 249)", "Player 2: ");
 
   var player2 = [bike2];
 
-  var playerLength2 = player2.length;
+  var score1 = 0;
+  var score2 = 0;
 
   var pause = false;
+
+  updateScore(player1, score1);
+  updateScore(player2, score2);
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -92,70 +95,66 @@ function runProgram(){
   Called in response to events.
   */
   function handleKeyDown(event) {
-    if(!pause)
-    if (event.which == KEY.W) {
-      console.log("up");
-      if (bike1.speedY == 0 && bike1.canUp) {
-        bike1.speedY = -20;
-        bike1.speedX = 0;
+    if(pause == false) {
+      if (event.which == KEY.W) {
+        console.log("up");
+        if (bike1.speedY == 0 && bike1.canUp) {
+          bike1.speedY = -20;
+          bike1.speedX = 0;
+        }
       }
-    }
-    if (event.which == KEY.S) {
-      console.log("down");
-      if (bike1.speedY == 0 && bike1.canDown) {
-        bike1.speedY = 20;
-        bike1.speedX = 0;
+      if (event.which == KEY.S) {
+        console.log("down");
+        if (bike1.speedY == 0 && bike1.canDown) {
+          bike1.speedY = 20;
+          bike1.speedX = 0;
+        }
       }
-    }
-    if (event.which == KEY.D) {
-      console.log("right");
-      if (bike1.speedX == 0 && bike1.canRight) {
-        bike1.speedY = 0;
-        bike1.speedX = 20;
+      if (event.which == KEY.D) {
+        console.log("right");
+        if (bike1.speedX == 0 && bike1.canRight) {
+          bike1.speedY = 0;
+          bike1.speedX = 20;
+        }
       }
-    }
-    if (event.which == KEY.A) {
-      console.log("left");
-      if (bike1.speedX == 0 && bike1.canLeft) {
-        bike1.speedY = 0;
-        bike1.speedX = -20;
+      if (event.which == KEY.A) {
+        console.log("left");
+        if (bike1.speedX == 0 && bike1.canLeft) {
+          bike1.speedY = 0;
+          bike1.speedX = -20;
+        }
+      }
+
+      if (event.which == KEY.UP) {
+        console.log("up");
+        if (bike2.speedY == 0 && bike2.canUp) {
+          bike2.speedY = -20;
+          bike2.speedX = 0;
+        }
+      }
+      if (event.which == KEY.DOWN) {
+        console.log("down");
+        if (bike2.speedY == 0 && bike2.canDown) {
+          bike2.speedY = 20;
+          bike2.speedX = 0;
+        }
+      }
+      if (event.which == KEY.RIGHT) {
+        console.log("right");
+        if (bike2.speedX == 0 && bike2.canRight) {
+          bike2.speedY = 0;
+          bike2.speedX = 20;
+        }
+      }
+      if (event.which == KEY.LEFT) {
+        console.log("left");
+        if (bike2.speedX == 0 && bike2.canLeft) {
+          bike2.speedY = 0;
+          bike2.speedX = -20;
+        }
       }
     }
 
-    if (event.which == KEY.UP) {
-      console.log("up");
-      if (bike2.speedY == 0 && bike2.canUp) {
-        bike2.speedY = -20;
-        bike2.speedX = 0;
-      }
-    }
-    if (event.which == KEY.DOWN) {
-      console.log("down");
-      if (bike2.speedY == 0 && bike2.canDown) {
-        bike2.speedY = 20;
-        bike2.speedX = 0;
-      }
-    }
-    if (event.which == KEY.RIGHT) {
-      console.log("right");
-      if (bike2.speedX == 0 && bike2.canRight) {
-        bike2.speedY = 0;
-        bike2.speedX = 20;
-      }
-    }
-    if (event.which == KEY.LEFT) {
-      console.log("left");
-      if (bike2.speedX == 0 && bike2.canLeft) {
-        bike2.speedY = 0;
-        bike2.speedX = -20;
-      }
-    }
-
-    if (event.which == KEY.ENTER) {
-      console.log("enter");
-      bike1.speedY = 0;
-      bike1.speedX = 0;
-    }
   }
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -206,16 +205,19 @@ function runProgram(){
     let obj = player[0];
 
     if (obj.x < 0 || obj.x > $("#board").width() - 20 || obj.y < 0 || obj.y > $("#board").height() - 20) {
-      //killPlayer(player);
+      killPlayer(player);
     }
   }
 
-  function checkSelf(player) {
+  function checkSelf(player, opponent) {
     let bike = player[0];
 
     for (var i = 1; i < player.length; i++) {
       if (bike.x == player[i].x && bike.y == player[i].y) {
-        //killPlayer(player);
+        killPlayer(player);
+      }
+      if (bike.x == opponent[i].x && bike.y == opponent[i].y) {
+        killPlayer(player);
       }
     }
 
@@ -231,16 +233,61 @@ function runProgram(){
   }
 
   function killPlayer(player) {
-    pause = true;
-    player1.speedX = 0;
-    player1.speedY = 0;
-    player2.speedX = 0;
-    player2.speedY = 0;
+    if (pause == false) {
+      pause = true;
+      player1[0].speedX = 0;
+      player1[0].speedY = 0;
+      player2[0].speedX = 0;
+      player2[0].speedY = 0;
 
-    updateScore(player);
+      if (player == player1) {
+        score2 ++;
+        updateScore(player2, score2);
+      }
+      else if (player == player2) {
+        score1 ++;
+        updateScore(player1, score1);
+      } 
+
+      setInterval(resetGame, 2000);
+    }
   }
 
-  function updateScore(player){
-    $("#score").text(player.length - 4);
+  function updateScore(player, score){
+    $(player[0].id + "score").text(player[0].scoreText + score);
+  }
+
+  function resetGame() {
+    $("#screenText").text(5);
+    setInterval(function() {
+      $("#screenText").text(4);
+    }, 1100);
+    setInterval(function() {
+      $("#screenText").text(3);
+    }, 2200);
+    setInterval(function() {
+      $("#screenText").text(2);
+    }, 3300);
+    setInterval(function() {
+      $("#screenText").text(1);
+    }, 4400);
+    setInterval(function() {
+      $("#screenText").text(0);
+    }, 5500);
+    setInterval(function() {
+      createBikes();
+    }, 6600);
+  }
+
+  function createBikes() {
+    bike1 = makeItem(3, 3, 20, 0, "#bike1", "rgb(242, 225, 94)", "Player 1: ", score1);
+
+    player1 = [bike1];
+
+    bike2 = makeItem(($("#board").width() / 20) - 4, ($("#board").height() / 20) - 4, -20, 0, "#bike2", "rgb(103, 198, 249)", "Player 2: ", score2);
+
+    player2 = [bike2];
+
+    pause = false;
   }
 }

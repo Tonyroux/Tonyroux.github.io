@@ -7,7 +7,7 @@ body {
 
 #board {
   width: 1040px;
-  height: 840px;
+  height: 600px;
   border: 1px solid white;
   background-image: url("checkers.png");
   position: relative;
@@ -37,4 +37,23 @@ body {
   width: 20px;
   height: 20px;
   position: absolute
+}
+
+#bike1score {
+  position: absolute;
+  color: white;
+  left: 102%;
+  width: 10%;
+  font-size: x-large;
+  font-family: fantasy;
+}
+
+#bike2score {
+  position: absolute;
+  color: white;
+  left: 102%;
+  top: 15%;
+  width: 10%;
+  font-size: x-large;
+  font-family: fantasy;
 }
