@@ -77,14 +77,16 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    redrawGameItem(player1);
-    redrawGameItem(player2);
+    if (pause == false) {
+      redrawGameItem(player1);
+      redrawGameItem(player2);
 
-    checkWalls(player1);
-    checkWalls(player2);
+      checkWalls(player1);
+      checkWalls(player2);
 
-    checkSelf(player1);
-    checkSelf(player2);
+      checkSelf(player1);
+      checkSelf(player2);
+    }
   }
   
   /* 
