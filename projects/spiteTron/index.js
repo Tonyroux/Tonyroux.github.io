@@ -238,9 +238,11 @@ function runProgram(){
       player2[0].speedX = 0;
       player2[0].speedY = 0;
       $(".trail").remove();
-      for(var i = 1; i <= 60; i++) {
+      for(var i = 1; i < 60; i++) {
         player1.pop();
         player2.pop();
+        console.log(player1[0]);
+        console.log(player1[1]);
       }
 
       if (player == player1) {
