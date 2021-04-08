@@ -84,8 +84,8 @@ function runProgram(){
       checkWalls(player1);
       checkWalls(player2);
 
-      checkSelf(player1);
-      checkSelf(player2);
+      checkSelf(player1, player2);
+      checkSelf(player2, player1);
     }
   }
   
