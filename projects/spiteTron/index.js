@@ -200,29 +200,33 @@ function runProgram(){
   }
 
   function checkWalls(player) {
-    let obj = player[0];
+    if (pause == false) {
+      let obj = player[0];
 
-    if (obj.x < 0 || obj.x > $("#board").width() - 20 || obj.y < 0 || obj.y > $("#board").height() - 20) {
-      killPlayer(player);
+      if (obj.x < 0 || obj.x > $("#board").width() - 20 || obj.y < 0 || obj.y > $("#board").height() - 20) {
+        killPlayer(player);
+      }
     }
   }
 
   function checkSelf(player, opponent) {
-    let bike = player[0];
+    if (pause == false) {
+      let bike = player[0];
 
-    for (var i = 1; i < player.length; i++) {
-      if (bike.x == player[i].x && bike.y == player[i].y) {
-        killPlayer(player);
+      for (var i = 1; i < player.length; i++) {
+        if (bike.x == player[i].x && bike.y == player[i].y) {
+          killPlayer(player);
+        }
+        if (bike.x == opponent[i].x && bike.y == opponent[i].y) {
+          killPlayer(player);
+        }
       }
-      if (bike.x == opponent[i].x && bike.y == opponent[i].y) {
-        killPlayer(player);
-      }
+
+      bike.x > bike.prevX ? bike.canLeft = false : bike.canLeft = true;
+      bike.x < bike.prevX ? bike.canRight = false : bike.canRight = true;
+      bike.y > bike.prevY ? bike.canUp = false : bike.canUp = true;
+      bike.y < bike.prevY ? bike.canDown = false : bike.canDown = true;
     }
-
-    bike.x > bike.prevX ? bike.canLeft = false : bike.canLeft = true;
-    bike.x < bike.prevX ? bike.canRight = false : bike.canRight = true;
-    bike.y > bike.prevY ? bike.canUp = false : bike.canUp = true;
-    bike.y < bike.prevY ? bike.canDown = false : bike.canDown = true;
   }
 
   function addTrail (player) {
@@ -237,14 +241,6 @@ function runProgram(){
       player1[0].speedY = 0;
       player2[0].speedX = 0;
       player2[0].speedY = 0;
-      $(".trail").remove();
-      for(var i = 1; i < 60; i++) {
-        player1.pop();
-        player2.pop();
-        console.log(player1.length);
-        console.log(player1[0]);
-      }
-
       if (player == player1) {
         score2 ++;
         updateScore(player2, score2);
@@ -253,8 +249,16 @@ function runProgram(){
         score1 ++;
         updateScore(player1, score1);
       } 
+      
+      $(".trail").remove();
+      for(var i = 0; i < 44; i++) {
+        player1.pop();
+        player2.pop();
+      }
 
-      //setInterval(resetGame, 2000);
+      
+
+      setInterval(resetGame, 2000);
     }
   }
 
@@ -263,25 +267,27 @@ function runProgram(){
   }
 
   function resetGame() {
-    $("#screenText").text(5);
-    setInterval(function() {
-      $("#screenText").text(4);
-    }, 1100);
-    setInterval(function() {
-      $("#screenText").text(3);
-    }, 2200);
+    $("#screenText").text(3);
     setInterval(function() {
       $("#screenText").text(2);
-    }, 3300);
+    }, 1100);
     setInterval(function() {
+      $("#screenText").text(1);
+    }, 2200);
+    setInterval(function() {
+      $("#screenText").text(0);
+    }, 3300);
+    /*setInterval(function() {
       $("#screenText").text(1);
     }, 4400);
     setInterval(function() {
       $("#screenText").text(0);
-    }, 5500);
+    }, 5500);*/
     setInterval(function() {
+      player1.pop();
+      player2.pop();
       createBikes();
-    }, 6600);
+    }, 4400);
   }
 
   function createBikes() {
