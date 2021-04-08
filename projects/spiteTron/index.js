@@ -280,6 +280,8 @@ function runProgram(){
   }
 
   function createBikes() {
+    $(".trail").remove();
+    
     bike1 = makeItem(3, 3, 20, 0, "#bike1", "rgb(242, 225, 94)", "Player 1: ", score1);
 
     player1 = [bike1];
