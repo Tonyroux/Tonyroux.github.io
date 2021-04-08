@@ -34,10 +34,6 @@ function runProgram(){
       width: $(id).width(),
       originalW: $(id).width(),
       height: $(id).height(),
-      left: x * 20,
-      right: (x * 20) + $(id).width(),
-      top: y * 20,
-      bottom: (y * 20) + $(id).height(),
       speedX: velX,
       speedY: velY,
       id: id,
@@ -239,6 +235,11 @@ function runProgram(){
       player1[0].speedY = 0;
       player2[0].speedX = 0;
       player2[0].speedY = 0;
+      $(".trail").remove();
+      for(var i = 1; i <= 60; i++) {
+        player1.pop();
+        player2.pop();
+      }
 
       if (player == player1) {
         score2 ++;
