@@ -25,7 +25,7 @@ function runProgram(){
   
   // Game Item Objects
   
-  function makeItem(x, y, velX, velY, id, color, scoreText, score) {
+  function makeItem(x, y, velX, velY, id, color) {
     var itemInstance = {
       x: x * 20,
       y: y * 20,
@@ -43,16 +43,15 @@ function runProgram(){
       canUp: velY > 0 ? false : true,
       canDown: velY < 0 ? false : true, 
       color: color,
-      scoreText: scoreText,
     };
     return itemInstance;
   }
 
-  var bike1 = makeItem(3, 3, 20, 0, "#bike1", "rgb(242, 225, 94)", "Player 1: ");
+  var bike1 = makeItem(3, 3, 20, 0, "#bike1", "rgb(242, 225, 94)");
 
   var player1 = [bike1];
 
-  var bike2 = makeItem(($("#board").width() / 20) - 4, ($("#board").height() / 20) - 4, -20, 0, "#bike2", "rgb(103, 198, 249)", "Player 2: ");
+  var bike2 = makeItem(($("#board").width() / 20) - 4, ($("#board").height() / 20) - 4, -20, 0, "#bike2", "rgb(103, 198, 249)");
 
   var player2 = [bike2];
 
@@ -169,6 +168,9 @@ function runProgram(){
   }*/
 
   function redrawGameItem(player) {
+    if($(player[0].id).css("z-index") !== 3) {
+      $(player[0].id).css("z-index", 3);
+    }
     for (var i = 0; i < player.length; i++) {
       let obj = player[i]
 
@@ -229,6 +231,37 @@ function runProgram(){
     }
   }
 
+  function tieDeath(obj1, obj2) {
+    let bike1 = obj1[0];
+    let bike2 = obj2[0];
+
+    for (var i = 1; i < obj1.length; i++) {
+      if (bike1.x == obj1[i].x && bike1.y == obj1[i].y) {
+        if(bike2.x == obj2[i].x && bike2.y == obj2[i].y) {
+          return true;
+        }
+        if(bike2.x == obj1[i].x && bike2.y == obj1[i].y) {
+          return true;
+        }
+      }
+
+      if (bike1.x == obj2[i].x && bike1.y == obj2[i].y) {
+        if(bike2.x == obj2[i].x && bike2.y == obj2[i].y) {
+          return true;
+        }
+        if(bike2.x == obj1[i].x && bike2.y == obj1[i].y) {
+          return true;
+        }
+      }
+    }
+
+    if (bike1.x < 0 || bike1.x > $("#board").width() - 20 || bike1.y < 0 || bike1.y > $("#board").height() - 20) {
+      if (bike2.x < 0 || bike2.x > $("#board").width() - 20 || bike2.y < 0 || bike2.y > $("#board").height() - 20) {
+        return true;
+      }
+    }
+  }
+
   function addTrail (player) {
     $('<div id="' + player[0].passId + 'trail' + (player.length - 1) + '" class = "trail" style= "z-index: -2; background-color:' + player[0].color + ';"></div>').insertAfter(player[0].id);
     player.push(makeItem(player[player.length - 1].prevX / 20, player[player.length - 1].prevY / 20, 0, 0, "#" + player[0].passId + 'trail' + (player.length - 1)))
@@ -241,62 +274,83 @@ function runProgram(){
       player1[0].speedY = 0;
       player2[0].speedX = 0;
       player2[0].speedY = 0;
-      if (player == player1) {
-        score2 ++;
-        updateScore(player2, score2);
-      }
-      else if (player == player2) {
-        score1 ++;
-        updateScore(player1, score1);
+
+      if (tieDeath(player1, player2)){
+        if (Math.random() < 0.5) {
+          score2 ++;
+          updateScore(player2, score2);
+        }
+        else {
+          score1 ++;
+          updateScore(player1, score1);
+        }
       } 
+
+      else {
+        if (player == player1) {
+          score2 ++;
+          updateScore(player2, score2);
+        }
+        else if (player == player2) {
+          score1 ++;
+          updateScore(player1, score1);
+        } 
+      }
       
       $(".trail").remove();
-      for(var i = 0; i < 44; i++) {
-        player1.pop();
-        player2.pop();
-      }
+      player1 = [bike1];
+      player2 = [bike2];
 
       
 
-      setInterval(resetGame, 2000);
+      resetGame();
     }
   }
 
   function updateScore(player, score){
-    $(player[0].id + "score").text(player[0].scoreText + score);
+    $(player[0].id + "score").text(score);
   }
 
   function resetGame() {
     $("#screenText").text(3);
-    setInterval(function() {
+    $("#screenText").css("z-index", 3);
+
+    $("#bike1").css("z-index", -2);
+    $("#bike2").css("z-index", -2);
+
+    $("#bike1").css("left", 0);
+    $("#bike2").css("left", 0);
+    $("#bike1").css("top", 0);
+    $("#bike2").css("top", 0);
+
+    console.log("reset in: 3");
+    setTimeout(function() {
       $("#screenText").text(2);
+      console.log("reset in: 2");
     }, 1100);
-    setInterval(function() {
+    setTimeout(function() {
       $("#screenText").text(1);
+      console.log("reset in: 1");
     }, 2200);
-    setInterval(function() {
+    setTimeout(function() {
       $("#screenText").text(0);
+      console.log("reset in: 0");
     }, 3300);
-    /*setInterval(function() {
-      $("#screenText").text(1);
-    }, 4400);
-    setInterval(function() {
-      $("#screenText").text(0);
-    }, 5500);*/
-    setInterval(function() {
-      player1.pop();
-      player2.pop();
+
+    setTimeout(function() {
       createBikes();
+      console.log("creating bikes!");
+      $("#screenText").css("z-index", -2);
     }, 4400);
   }
 
   function createBikes() {
     
-    bike1 = makeItem(3, 3, 20, 0, "#bike1", "rgb(242, 225, 94)", "Player 1: ", score1);
+    bike1 = makeItem(3, 3, 20, 0, "#bike1", "rgb(242, 225, 94)", "Player 1: ");
 
     player1 = [bike1];
 
-    bike2 = makeItem(($("#board").width() / 20) - 4, ($("#board").height() / 20) - 4, -20, 0, "#bike2", "rgb(103, 198, 249)", "Player 2: ", score2);
+    bike2 = makeItem(($("#board").width() / 20) - 4, ($("#board").height() / 20) - 4, -20, 0, "#bike2", "rgb(103, 198, 249)", "Player 2: ");
 
     player2 = [bike2];
 

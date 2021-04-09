@@ -1,6 +1,6 @@
 
 body {
-  background-color: darkgreen;
+  background-color: rgb(15, 1, 53);
   overflow-x:hidden;
   overflow-y:hidden;
 }
@@ -9,8 +9,16 @@ body {
   width: 1040px;
   height: 600px;
   border: 1px solid white;
-  background-image: url("checkers.png");
+  background-image: url("grid.png");
   position: relative;
+}
+
+#gridGrad {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(45deg, #c242f5, #4542f5, #aa80ff, #4542f5, #c242f5);
+  position: absolute;
+  z-index: -1;
 }
 
 #bike1 {
@@ -42,8 +50,8 @@ body {
 #bike1score {
   position: absolute;
   color: white;
-  left: 102%;
-  width: 10%;
+  left: 109%;
+  width: 20%;
   font-size: x-large;
   font-family: fantasy;
 }
@@ -51,9 +59,33 @@ body {
 #bike2score {
   position: absolute;
   color: white;
-  left: 102%;
+  left: 109%;
   top: 15%;
-  width: 10%;
+  width: 20%;
+  font-size: x-large;
+  font-family: fantasy;
+}
+
+#p1bike {
+  position: absolute;
+  left: 100%;
+  top: -2%;
+  width: 8%;
+}
+
+#p2bike {
+  position: absolute;
+  left: 100%;
+  top: 13%;
+  width: 8%;
+}
+
+#screenText {
+  position: absolute;
+  color: white;
+  left: 48%;
+  top: 48%;
+  width: 4%;
   font-size: x-large;
   font-family: fantasy;
 }
