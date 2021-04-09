@@ -183,21 +183,12 @@ function runProgram(){
       }
 
       else {
-        if (player[i] = player[player.length - 1]) {
-          obj.x = player[i - 1].prevX;
-          obj.y = player[i - 1].prevY;
-          if ($(obj.id).css("z-index") == -2) {
-            $(obj.id).css("z-index", 1)
-          }
-        }
-        else {
-          obj.prevX = obj.x;
-          obj.x = player[i - 1].prevX;
-          obj.prevY = obj.y;
-          obj.y = player[i - 1].prevY;
-          if ($(obj.id).css("z-index") == -2) {
-            $(obj.id).css("z-index", 1)
-          }
+        obj.prevX = obj.x;
+        obj.x = player[i - 1].prevX;
+        obj.prevY = obj.y;
+        obj.y = player[i - 1].prevY;
+        if ($(obj.id).css("z-index") == -2) {
+          $(obj.id).css("z-index", 1)
         }
       }
       
@@ -224,7 +215,7 @@ function runProgram(){
     if (pause == false) {
       let bike = player[0];
 
-      for (var i = 1; i < player.length; i++) {
+      for (var i = 1; i < player.length - 1; i++) {
         if (bike.x == player[i].x && bike.y == player[i].y) {
           killPlayer(player);
         }
