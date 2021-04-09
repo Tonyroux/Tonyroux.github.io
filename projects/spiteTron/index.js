@@ -183,12 +183,21 @@ function runProgram(){
       }
 
       else {
-        obj.prevX = obj.x;
-        obj.x = player[i - 1].prevX;
-        obj.prevY = obj.y;
-        obj.y = player[i - 1].prevY;
-        if ($(obj.id).css("z-index") == -2) {
-          $(obj.id).css("z-index", 1)
+        if (player[i] = player[player.length - 1]) {
+          obj.x = player[i - 1].prevX;
+          obj.y = player[i - 1].prevY;
+          if ($(obj.id).css("z-index") == -2) {
+            $(obj.id).css("z-index", 1)
+          }
+        }
+        else {
+          obj.prevX = obj.x;
+          obj.x = player[i - 1].prevX;
+          obj.prevY = obj.y;
+          obj.y = player[i - 1].prevY;
+          if ($(obj.id).css("z-index") == -2) {
+            $(obj.id).css("z-index", 1)
+          }
         }
       }
       
@@ -196,7 +205,7 @@ function runProgram(){
       $(obj.id).css("top", obj.y);
     }
 
-    if (player.length < 61) {
+    if (player.length < 101) {
       addTrail(player);
     }
   }
